@@ -8,7 +8,7 @@
  * Author URI: https://nahid.dev
  * Text Domain: netlifypress
  *
- * @since      1.0.1
+ * @since      1.0
  * @package    NetlifyPress
  * @author     Nahid Ferdous Mohit
  */
