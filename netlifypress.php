@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NetlifyPress
  * Plugin URI: https://nahid.dev/project/netlifypress
- * Description: Deploy to Netlify from WordPress
+ * Description: Seamlessly trigger deploys in Netlify from WordPress
  * Author: Nahid Ferdous Mohit
  * Version: 1.0
  * Author URI: https://nahid.dev
