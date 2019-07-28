@@ -1,1 +1,1 @@
-# Deploy to Netlify from WordPress
+# NetlifyPress
