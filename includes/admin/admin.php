@@ -35,32 +35,71 @@ function netlifypress_options_page_display() {
                             <a class="nav-link active" id="connect-netlify-tab" data-toggle="tab" href="#connect-netlify" role="tab" aria-controls="connect-netlify" aria-selected="true"><?php _e( 'Connect with Netlify', 'netlifypress' ); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="deploy-configuration-tab" data-toggle="tab" href="#deploy-configuration" role="tab" aria-controls="deploy-configuration" aria-selected="false"><?php _e( 'Deploy Configuration', 'netlifypress' ); ?></a>
+                            <a class="nav-link" id="deploy-configuration-tab" data-toggle="tab" href="#automatic-deployment" role="tab" aria-controls="automatic-deployment" aria-selected="false"><?php _e( 'Automatic Deployment', 'netlifypress' ); ?></a>
                         </li>
                     </ul>
 
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="connect-netlify" role="tabpanel" aria-labelledby="connect-netlify">
-                            <?php
-                                if ( isset( $_POST[ 'netlifypress_webhook_url' ] ) ) {
-                                    update_option( 'netlifypress_webhook_url', $_POST[ 'netlifypress_webhook_url' ] );
-                                }
-                            ?>
-                            <label for="netlifypress_webhook_url"><?php _e( 'Webhook URL', 'netlifypress' ); ?></label>
-                            <input type="text" name="webhook_url" id="webhook_url" placeholder="e.g. https://api.netlify.com/build_hooks/XXXXXXXXXXXX" class="form-control" value="<?php echo get_option( 'netlifypress_webhook_url' ); ?>" required>
+                            <fieldset>
+                                <div class="form-group">
+                                    <?php
+                                        if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
+                                            update_option( 'netlifypress_build_hook_url', $_POST[ 'netlifypress_build_hook_url' ] );
+                                        }
+                                    ?>
+                                    <label for="netlifypress_build_hook_url"><?php _e( 'Build Hook URL', 'netlifypress' ); ?></label>
+                                    <input type="text" name="netlifypress_build_hook_url" id="netlifypress_build_hook_url" placeholder="e.g. https://api.netlify.com/build_hooks/XXXXXXXXXXXX" class="form-control" value="<?php echo get_option( 'netlifypress_build_hook_url' ); ?>" required>
+                                </div>
+                            </fieldset>
                         </div>
 
-                        <div class="tab-pane fade" id="deploy-configuration" role="tabpanel" aria-labelledby="deploy-configuration">
-                            <label for="auto_deploy"><?php _e( 'Automatic Deployments', 'netlifypress' ); ?></label>
-                            <input type="radio" name="auto_deploy" id="auto_deploy" value="No"> No
-                            <input type="radio" name="auto_deploy" id="auto_deploy" value="Yes"> Yes
+                        <div class="tab-pane fade" id="automatic-deployment" role="tabpanel" aria-labelledby="automatic-deployment">
+                            <fieldset>
+                                <div class="form-group">
+                                    <h3><?php _e( 'Automatic Deployment', 'netlifypress' ); ?></h3>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="auto_deploy" name="auto_deploy" value="on">
+                                        <label class="custom-control-label" for="auto_deploy"> <?php _e( 'On', 'netlifypress' ); ?></label>
+                                    </div>
+                                </div>    
 
-                            <label for="post_types"><?php _e( 'Post Types', 'netlifypress' ); ?></label>
-                            <?php
-                                foreach ( get_post_types( '', 'objects' ) as $post_type ) {
-                                    echo '<input type="checkbox" name="post_types" id="post_types" value="' . $post_type->name . '">' . $post_type->label;
-                                }
-                            ?>
+                                <div class="form-group">
+                                    <h3><?php _e( 'Actions', 'netlifypress' ); ?></h3>
+                                    <p><?php _e( 'Specify actions when automatic deployment should trigger', 'netlifypress' ); ?></p>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="action_all" name="action_auto_deploy" value="all">
+                                        <label class="custom-control-label" for="action_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="action_post_save_update" name="action_auto_deploy" value="post_save_update">
+                                        <label class="custom-control-label" for="action_post_save_update"> <?php _e( 'On post save and update', 'netlifypress' ); ?></label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="action_post_delete" name="action_auto_deploy" value="on">
+                                        <label class="custom-control-label" for="action_post_delete"> <?php _e( 'On post delete', 'netlifypress' ); ?></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h3><?php _e( 'Post Types', 'netlifypress' ); ?></h3>
+                                    <p><?php _e( 'Specify post types where the above actions should apply', 'netlifypress' ); ?></p>
+
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="post_type_all" name="post_types" value="all">
+                                        <label class="custom-control-label" for="post_type_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
+                                    </div>
+                                    <?php
+                                        foreach ( get_post_types( '', 'objects' ) as $post_type ) {
+                                            ?>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="post_type_<?php echo $post_type->name; ?>" name="post_types" value="<?php echo $post_type->name; ?>">
+                                                <label class="custom-control-label" for="post_type_<?php echo $post_type->name; ?>"> <?php echo $post_type->label; ?></label>
+                                            </div>
+                                            <?php
+                                        }
+                                    ?>
+                                </div>
                         </div>
                     </div>
 
