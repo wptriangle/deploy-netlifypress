@@ -8,3 +8,17 @@
  */
 
 @import "~bootstrap/scss/bootstrap";
+
+/*
+ * Typography
+ */
+
+@font-face {
+    font-family: 'Poppins';
+    src: url( ../fonts/poppins-regular.ttf );
+    font-display: swap;
+}
+
+.netlifypress-admin-wrapper {
+    font-family: 'Poppins', sans-serif;
+}
