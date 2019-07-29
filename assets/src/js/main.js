@@ -8,3 +8,9 @@
  */
 
 import '../sass/main.scss';
+
+/*
+ * Bootstrap JS
+ */
+
+import 'bootstrap';
