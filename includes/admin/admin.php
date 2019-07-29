@@ -36,7 +36,11 @@ function netlifypress_options_page_display() {
                 <label for="webhook_url"><?php _e( 'Webhook URL', 'netlifypress' ); ?></label>
                 <input type="text" name="webhook_url" id="webhook_url" placeholder="e.g. https://api.netlify.com/build_hooks/XXXXXXXXXXXX" class="form-control" value="<?php echo get_option( 'webhook_url' ); ?>" required>
 
-                <label for=""><?php _e( 'Post Types', 'netlifypress' ); ?></label>
+                <label for="auto_deploy"><?php _e( 'Automatic Deployments', 'netlifypress' ); ?></label>
+                <input type="radio" name="auto_deploy" id="auto_deploy" value="No"> No
+                <input type="radio" name="auto_deploy" id="auto_deploy" value="Yes"> Yes
+
+                <label for="post_types"><?php _e( 'Post Types', 'netlifypress' ); ?></label>
                 <?php
                     foreach ( get_post_types( '', 'objects' ) as $post_type ) {
                         echo '<input type="checkbox" name="post_types" id="post_types" value="' . $post_type->name . '">' . $post_type->label;
