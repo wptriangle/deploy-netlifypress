@@ -19,4 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Enqueue CSS and JS assets
  */
 
-require_once plugin_dir_path(dirname(__FILE__)) . 'includes/assets.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/assets.php';
+
+/*
+ * Admin pages
+ */
+
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/admin.php';
