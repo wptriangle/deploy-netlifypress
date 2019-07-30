@@ -61,7 +61,16 @@ function netlifypress_options_page_display() {
                                     <div class="custom-control custom-switch">
                                         <?php
                                             if ( isset( $_POST[ 'auto_deploy' ] ) ) {
-                                                update_option( 'auto_deploy', $_POST[ 'auto_deploy' ] );
+                                                $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
+
+                                                $valid_auto_deploy_statuses = array(
+                                                    'off',
+                                                    'on'
+                                                );
+    
+                                                if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
+                                                    update_option( 'auto_deploy', $auto_deploy_status );
+                                                }
                                             }
                                         ?>
                                         <input type="hidden" name="auto_deploy" value="off">
