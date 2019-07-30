@@ -45,11 +45,11 @@ function netlifypress_options_page_display() {
                                 <div class="form-group">
                                     <?php
                                         if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
-                                            update_option( 'netlifypress_build_hook_url', $_POST[ 'netlifypress_build_hook_url' ] );
+                                            update_option( 'netlifypress_build_hook_url', esc_url_raw( $_POST[ 'netlifypress_build_hook_url' ] ) );
                                         }
                                     ?>
                                     <label for="netlifypress_build_hook_url"><?php _e( 'Build Hook URL', 'netlifypress' ); ?></label>
-                                    <input type="text" name="netlifypress_build_hook_url" id="netlifypress_build_hook_url" placeholder="e.g. https://api.netlify.com/build_hooks/XXXXXXXXXXXX" class="form-control" value="<?php echo get_option( 'netlifypress_build_hook_url' ); ?>" required>
+                                    <input type="url" name="netlifypress_build_hook_url" id="netlifypress_build_hook_url" placeholder="e.g. https://api.netlify.com/build_hooks/XXXXXXXXXXXX" class="form-control" value="<?php echo esc_url( get_option( 'netlifypress_build_hook_url' ) ); ?>" required>
                                 </div>
                             </fieldset>
                         </div>
