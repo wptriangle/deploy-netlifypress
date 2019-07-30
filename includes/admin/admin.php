@@ -101,7 +101,7 @@ function netlifypress_options_page_display() {
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group post-types-form-group">
                                     <h3><?php _e( 'Post Types', 'netlifypress' ); ?></h3>
                                     <p><?php _e( 'Specify post types where the above actions should apply', 'netlifypress' ); ?></p>
 
@@ -112,7 +112,7 @@ function netlifypress_options_page_display() {
                                     ?>
 
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="post_type_all" <?php echo ( $valid_post_types == get_option( 'post_types' ) ) ? 'checked' : ''; ?>>
+                                        <input type="checkbox" class="custom-control-input" id="post_type_all" <?php echo ( array_diff( get_post_types(), get_option( 'post_types' ) ) === array_diff( get_option( 'post_types' ), get_post_types() ) ) ? 'checked' : ''; ?>>
                                         <label class="custom-control-label" for="post_type_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
                                     </div>
                                     <?php
