@@ -70,7 +70,7 @@ function netlifypress_options_page_display() {
                                     </div>
                                 </div>    
 
-                                <div class="form-group">
+                                <div class="form-group auto-deploy-action-form-group">
                                     <h3><?php _e( 'Actions', 'netlifypress' ); ?></h3>
                                     <p><?php _e( 'Specify actions when automatic deployment should trigger', 'netlifypress' ); ?></p>
 
@@ -86,7 +86,7 @@ function netlifypress_options_page_display() {
                                     ?>
 
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="action_auto_deploy_all">
+                                        <input type="checkbox" class="custom-control-input" id="action_auto_deploy_all" <?php echo ( $valid_auto_deploy_actions == get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
                                         <label class="custom-control-label" for="action_auto_deploy_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
                                     </div>
 
