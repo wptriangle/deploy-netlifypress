@@ -26,3 +26,9 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/assets.php';
  */
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/admin.php';
+
+/*
+ * Automatic Deploy Logic
+ */
+
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/auto-deploy.php';
