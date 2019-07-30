@@ -60,13 +60,13 @@ function netlifypress_options_page_display() {
                                     <h3><?php _e( 'Automatic Deployment', 'netlifypress' ); ?></h3>
                                     <div class="custom-control custom-switch">
                                         <?php
+                                            $valid_auto_deploy_statuses = array(
+                                                'off',
+                                                'on'
+                                            );
+
                                             if ( isset( $_POST[ 'auto_deploy' ] ) ) {
                                                 $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
-
-                                                $valid_auto_deploy_statuses = array(
-                                                    'off',
-                                                    'on'
-                                                );
     
                                                 if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
                                                     update_option( 'auto_deploy', $auto_deploy_status );
@@ -90,7 +90,11 @@ function netlifypress_options_page_display() {
                                         );
 
                                         if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
-                                            update_option( 'action_auto_deploy', $_POST[ 'action_auto_deploy' ] );
+                                            $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
+
+                                            if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
+                                                update_option( 'action_auto_deploy', $action_auto_deploy );
+                                            }
                                         }
                                     ?>
 
@@ -115,8 +119,14 @@ function netlifypress_options_page_display() {
                                     <p><?php _e( 'Specify post types where the above actions should apply', 'netlifypress' ); ?></p>
 
                                     <?php
+                                        $valid_post_types = get_post_types();
+
                                         if ( isset( $_POST[ 'post_types' ] ) ) {
-                                            update_option( 'post_types', $_POST[ 'post_types' ] );
+                                            $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
+
+                                            if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
+                                                update_option( 'post_types', $set_post_type );
+                                            }
                                         }
                                     ?>
 
