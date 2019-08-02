@@ -33,7 +33,7 @@ if ( get_option( 'netlifypress_build_hook_url' ) ) {
 
     /* Publish/Update Action */
 
-    if ( in_array( 'save_update', get_option( 'action_auto_deploy' ) ) ) {
+    if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) ) {
         add_action( 'save_post', 'deploy_trigger' );
     }
 

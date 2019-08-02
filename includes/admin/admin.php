@@ -85,7 +85,8 @@ function netlifypress_options_page_display() {
 
                                     <?php
                                         $valid_auto_deploy_actions = array(
-                                            'save_update',
+                                            'publish',
+                                            'update',
                                             'delete'
                                         );
 
@@ -104,8 +105,13 @@ function netlifypress_options_page_display() {
                                     </div>
 
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="action_auto_deploy_save_update" name="action_auto_deploy[]" value="save_update" <?php echo in_array( 'save_update', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
-                                        <label class="custom-control-label" for="action_auto_deploy_save_update"> <?php _e( 'On post save and update', 'netlifypress' ); ?></label>
+                                        <input type="checkbox" class="custom-control-input" id="action_auto_deploy_publish" name="action_auto_deploy[]" value="publish" <?php echo in_array( 'publish', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
+                                        <label class="custom-control-label" for="action_auto_deploy_publish"> <?php _e( 'On post publish', 'netlifypress' ); ?></label>
+                                    </div>
+
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="action_auto_deploy_update" name="action_auto_deploy[]" value="update" <?php echo in_array( 'update', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
+                                        <label class="custom-control-label" for="action_auto_deploy_update"> <?php _e( 'On post update', 'netlifypress' ); ?></label>
                                     </div>
                                 
                                     <div class="custom-control custom-switch">
