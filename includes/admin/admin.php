@@ -87,7 +87,7 @@ function netlifypress_options_page_display() {
                                         $valid_auto_deploy_actions = array(
                                             'publish',
                                             'update',
-                                            'delete'
+                                            'trash'
                                         );
 
                                         if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
@@ -115,8 +115,8 @@ function netlifypress_options_page_display() {
                                     </div>
                                 
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="action_auto_deploy_delete" name="action_auto_deploy[]" value="delete" <?php echo in_array( 'delete', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
-                                        <label class="custom-control-label" for="action_auto_deploy_delete"> <?php _e( 'On post delete', 'netlifypress' ); ?></label>
+                                        <input type="checkbox" class="custom-control-input" id="action_auto_deploy_trash" name="action_auto_deploy[]" value="trash" <?php echo in_array( 'trash', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
+                                        <label class="custom-control-label" for="action_auto_deploy_trash"> <?php _e( 'On post trash', 'netlifypress' ); ?></label>
                                     </div>
                                 </div>
 
