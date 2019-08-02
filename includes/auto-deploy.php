@@ -21,9 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( get_option( 'netlifypress_build_hook_url' ) ) {
 
-    /* Publish/Update Action */
-
-    if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) ) {
+    if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) || in_array( 'trash', get_option( 'action_auto_deploy' ) ) ) {
         add_action( 'save_post', 'deploy_trigger_publish_update', 10, 2 );
     }
 
@@ -34,20 +32,31 @@ if ( get_option( 'netlifypress_build_hook_url' ) ) {
         $post_type = get_post_type( $post_id );
         if ( in_array( $post_type, get_option( 'post_types' ) ) ) {
 
-            /* Make sure post is not auto-draft */
+            /* Publish/Update Action */
 
-            if ( 'auto-draft' == get_post_status( $post_id ) ) {
-                return;
+            if ( ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) ) && 'trash' != get_post_status( $post_id ) ) {
+
+                /* Make sure post is not auto-draft, draft, trashed or a revision */
+
+                if ( 'auto-draft' == get_post_status( $post_id ) || 'draft' == get_post_status( $post_id ) || wp_is_post_revision( $post_id ) ) {
+                    return;
+                }
+
+                if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) && $post->post_date === $post->post_modified ) {
+
+                    wp_remote_post( get_option( 'netlifypress_build_hook_url' ) . '?trigger_title=' . $post->post_title . ' was published' );
+
+                } elseif ( in_array( 'update', get_option( 'action_auto_deploy' ) ) && $post->post_date != $post->post_modified ) {
+
+                    wp_remote_post( get_option( 'netlifypress_build_hook_url' ) . '?trigger_title=' . $post->post_title . ' was updated' );
+
+                }
             }
 
-            if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) && $post->post_date === $post->post_modified ) {
+            /* Trash Action */
 
-                wp_remote_post( get_option( 'netlifypress_build_hook_url' ) . '?trigger_title=' . $post->post_title . ' was published' );
-
-            } elseif ( in_array( 'update', get_option( 'action_auto_deploy' ) ) && $post->post_date != $post->post_modified ) {
-
-                wp_remote_post( get_option( 'netlifypress_build_hook_url' ) . '?trigger_title=' . $post->post_title . ' was updated' );
-
+            elseif ( in_array( 'trash', get_option( 'action_auto_deploy' ) ) && 'trash' == get_post_status( $post_id ) ) {
+                wp_remote_post( get_option( 'netlifypress_build_hook_url' ) . '?trigger_title=' . $post->post_title . ' was trashed' );
             }
         }
     }
