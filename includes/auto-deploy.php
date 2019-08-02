@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( get_option( 'netlifypress_build_hook_url' ) ) {
 
     if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) || in_array( 'trash', get_option( 'action_auto_deploy' ) ) ) {
-        add_action( 'save_post', 'deploy_trigger_publish_update', 10, 2 );
+        add_action( 'save_post', 'deploy_trigger', 10, 2 );
     }
 
-    function deploy_trigger_publish_update( $post_id, $post ) {
+    function deploy_trigger( $post_id, $post ) {
 
         /* Make sure trigger for post type is enabled */
 
