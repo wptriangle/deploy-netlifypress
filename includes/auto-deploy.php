@@ -36,7 +36,7 @@ if ( get_option( 'netlifypress_build_hook_url' ) ) {
 
             if ( ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) ) && 'trash' != get_post_status( $post_id ) ) {
 
-                /* Make sure post is not auto-draft, draft, trashed or a revision */
+                /* Make sure post is not auto-draft, draft or a revision */
 
                 if ( 'auto-draft' == get_post_status( $post_id ) || 'draft' == get_post_status( $post_id ) || wp_is_post_revision( $post_id ) ) {
                     return;
