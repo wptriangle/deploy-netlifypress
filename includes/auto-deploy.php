@@ -21,16 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( get_option( 'netlifypress_build_hook_url' ) ) {
 
-    function deploy_trigger( $post_id ) {
-        $post_type = get_post_type( $post_id );
-
-        /* Make sure trigger for post type is enabled */
-
-        if ( in_array( $post_type, get_option( 'post_types' ) ) ) {
-            wp_remote_post( esc_url( get_option( 'netlifypress_build_hook_url' ) ) );
-        }
-    }
-
     /* Publish/Update Action */
 
     if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) ) {
@@ -41,5 +31,22 @@ if ( get_option( 'netlifypress_build_hook_url' ) ) {
 
     if ( in_array( 'delete', get_option( 'action_auto_deploy' ) ) ) {
         add_action( 'delete_post', 'deploy_trigger' );
+    }
+
+    function deploy_trigger( $post_id ) {
+        $post_type = get_post_type( $post_id );
+        global $post;
+
+        /* Make sure trigger for post type is enabled */
+
+        if ( in_array( $post_type, get_option( 'post_types' ) ) ) {
+
+            /* Run trigger only for published posts */
+            if ( isset( $post->post_status ) && 'publish' != $post->post_status ) {
+                return;
+            }
+
+            wp_remote_post( esc_url( get_option( 'netlifypress_build_hook_url' ) ) );
+        }
     }
 }
