@@ -37,6 +37,9 @@ function netlifypress_options_page_display() {
                         <li class="nav-item">
                             <a class="nav-link" id="deploy-configuration-tab" data-toggle="tab" href="#automatic-deployment" role="tab" aria-controls="automatic-deployment" aria-selected="false"><?php _e( 'Automatic Deployment', 'netlifypress' ); ?></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="manual-configuration-tab" data-toggle="tab" href="#manual-deployment" role="tab" aria-controls="manual-deployment" aria-selected="false"><?php _e( 'Manual Deployment', 'netlifypress' ); ?></a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -77,7 +80,7 @@ function netlifypress_options_page_display() {
                                         <input type="checkbox" class="custom-control-input" id="auto_deploy" name="auto_deploy" value="on" <?php echo checked( 'on', get_option( 'auto_deploy' ), true  ); ?>>
                                         <label class="custom-control-label" for="auto_deploy"> <?php _e( 'On', 'netlifypress' ); ?></label>
                                     </div>
-                                </div>    
+                                </div>
 
                                 <div class="form-group auto-deploy-action-form-group">
                                     <h3><?php _e( 'Actions', 'netlifypress' ); ?></h3>
@@ -150,6 +153,34 @@ function netlifypress_options_page_display() {
                                             <?php
                                         }
                                     ?>
+                                </div>
+                            </fieldset>    
+                        </div>
+
+                        <div class="tab-pane fade show" id="manual-deployment" role="tabpanel" aria-labelledby="manual-deployment">
+                            <fieldset>
+                                <div class="form-group">
+                                    <h3><?php _e( 'Manual Deployment', 'netlifypress' ); ?></h3>
+                                    <p><?php _e( 'Turn on if you want to have a manual deployment button on your top bar', 'netlifypress' ); ?></p>
+                                    <div class="custom-control custom-switch">
+                                        <?php
+                                            $valid_manual_deploy_statuses = array(
+                                                'off',
+                                                'on'
+                                            );
+
+                                            if ( isset( $_POST[ 'manual_deploy' ] ) ) {
+                                                $manual_deploy_status = sanitize_text_field( $_POST[ 'manual_deploy' ] );
+    
+                                                if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
+                                                    update_option( 'manual_deploy', $manual_deploy_status );
+                                                }
+                                            }
+                                        ?>
+                                        <input type="hidden" name="manual_deploy" value="off">
+                                        <input type="checkbox" class="custom-control-input" id="manual_deploy" name="manual_deploy" value="on" <?php echo checked( 'on', get_option( 'manual_deploy' ), true  ); ?>>
+                                        <label class="custom-control-label" for="manual_deploy"> <?php _e( 'On', 'netlifypress' ); ?></label>
+                                    </div>
                                 </div>
                             </fieldset>    
                         </div>
