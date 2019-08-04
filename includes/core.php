@@ -32,3 +32,9 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/admin.php'
  */
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/auto-deploy.php';
+
+/*
+ * Manual Deployment
+ */
+
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/manual-deploy.php';
