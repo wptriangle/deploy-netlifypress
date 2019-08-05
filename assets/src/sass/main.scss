@@ -25,9 +25,9 @@
 
     /* Header */
 
-    header {
+    header.netlifypress-admin-header {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 70px;
 
         h1 {
             display: inline-block;
@@ -38,29 +38,77 @@
     /* Tabs */
 
     ul.nav {
+        display: block;
         margin-bottom: 50px;
 
         li {
-            flex: 1;
-            text-align: center;
 
             a {
-                display: inline;
+                display: block;
                 font-size: 18px;
                 color: #000;
+                padding: 0;
 
+                .row {
+                    border: 1px solid #00C7B7;
+                    margin: 0;
+                }
+
+                .tab-icon {
+                    background-color: #00C7B7;
+                    color: #fff;
+                    padding: 15px 15px 15px 13px;
+
+                    svg {
+                        display: block;
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+
+                .tab-label {
+                    text-align: center;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
+
+                &.active,
                 &:hover,
                 &:focus {
                     box-shadow: none;
-                }
 
-                svg {
-                    display: block;
-                    margin: 0 auto 15px auto;
-                    width: 40px;
-                    height: 40px;
+                    .row {
+                        background-color: #00C7B7;
+                        color: #fff;
+                    }
                 }
             }
         }
+
+        .netlifypress-save-settings {
+            text-align: center;
+            margin-top: 30px;
+
+            .btn.btn-primary {
+                background-color: #00C7B7;
+                border-color: #00C7B7;
+            }
+        }
+    }
+
+    /* Tab Content */
+
+    .tab-content {
+
+        .form-group {
+            margin-bottom: 50px;
+        }
+    }
+
+    /* Custom Bootstrap Switches */
+
+    .custom-control-input:checked ~ .custom-control-label::before {
+        border-color: #00c7b7;
+        background-color: #00c7b7;
     }
 }
