@@ -33,8 +33,10 @@ function netlifypress_manual_deploy_button( $wp_admin_bar ) {
 }
 
 /*
- * Netlify Deploy Trigger Script
+ * Netlify Deploy Trigger
  */
+
+/* Initialize the trigger */
 
 add_action( 'init', 'netlifypress_manual_deploy_initialize' );
 function netlifypress_manual_deploy_initialize() {
@@ -43,6 +45,8 @@ function netlifypress_manual_deploy_initialize() {
         add_action( 'wp_enqueue_scripts', 'netlifypress_manual_trigger_script' );
     }
 }
+
+/* Manual deploy trigger script */
 
 function netlifypress_manual_trigger_script() {
     if ( ! is_admin() && ! wp_script_is( 'jquery', 'done' ) ) {
@@ -66,17 +70,17 @@ function netlifypress_manual_trigger_script() {
     ' );
 }
 
-/* Front-end button icon */
+/* Top Admin Bar link icon */
 
 add_action( 'init', 'netlifypress_frontend_button_icon' );
 function netlifypress_frontend_button_icon() {
     if ( current_user_can( 'manage_options' ) && is_admin_bar_showing() ) {
-        add_action( 'wp_footer', 'netlifypress_frontend_button_icon_styles' );
-        add_action( 'admin_footer', 'netlifypress_frontend_button_icon_styles' );
+        add_action( 'wp_footer', 'netlifypress_topbar_button_icon_styles' );
+        add_action( 'admin_footer', 'netlifypress_topbar_button_icon_styles' );
     }
 }
 
-function netlifypress_frontend_button_icon_styles() {
+function netlifypress_topbar_button_icon_styles() {
     ?>
         <style type="text/css">
             .netlifypress_manual_deploy_button a.ab-item .ab-icon {
