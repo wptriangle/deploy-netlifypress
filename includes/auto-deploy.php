@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Auto Deploy Triggers
  */
 
-if ( get_option( 'netlifypress_build_hook_url' ) ) {
+if ( ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'auto_deploy' ) == 'on' ) {
 
     /* Initialize the trigger */
 
