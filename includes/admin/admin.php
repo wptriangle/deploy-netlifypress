@@ -124,7 +124,23 @@ function netlifypress_options_page_display() {
                                             </div>
                                         </div>
 
-                                        <?php if ( get_option( 'auto_deploy' ) == 'on' ) { ?>
+                                        <style>
+                                            .auto-deploy-actions-post-types {
+                                                <?php
+                                                    if ( get_option( 'auto_deploy' ) == 'on' ) {
+                                                        ?>
+                                                            display: block;
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                            display: none;
+                                                        <?php
+                                                    }
+                                                ?>
+                                            }
+                                        </style>
+
+                                        <div class="auto-deploy-actions-post-types">
                                             <div class="form-group auto-deploy-action-form-group">
                                                 <h3><?php _e( 'Actions', 'netlifypress' ); ?></h3>
                                                 <p><?php _e( 'Specify actions when automatic deployment should trigger', 'netlifypress' ); ?></p>
@@ -197,7 +213,7 @@ function netlifypress_options_page_display() {
                                                     }
                                                 ?>
                                             </div>
-                                        <?php } ?>
+                                        </div>
                                     </fieldset>    
                                 </div>
 

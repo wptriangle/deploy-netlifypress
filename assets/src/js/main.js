@@ -28,10 +28,10 @@ import '@fortawesome/fontawesome-free/js/brands'
  * Custom JS
  */
 
-/* "Selct All" checkboxes for the auto-deploy selections */
-
 ( function( $ ) {
     $( document ).ready( function() {
+
+        /* "Selct All" checkboxes for the auto-deploy selections */
 
         /* Auto Deploy Action Selection */
 
@@ -76,5 +76,12 @@ import '@fortawesome/fontawesome-free/js/brands'
                 $( '.post-types-form-group #post_type_all' ).prop( 'checked', false );
             }
         } );
+
+        /* Auto Deploy Actions - Display Conditions */
+
+        $( '#automatic-deployment input#auto_deploy' ).click( function () {
+            $('.auto-deploy-actions-post-types').slideToggle();
+        });
+
     } );
 } )( jQuery );
