@@ -51,6 +51,7 @@ function netlifypress_manual_trigger_script() {
     wp_add_inline_script( 'jquery', '
         jQuery( document ).ready( function() {
             jQuery( ".netlifypress_manual_deploy_button a" ).on( "click", function( e ) {
+                event.preventDefault();
                 if ( confirm( "Are you sure that you want to trigger a deployment?" ) ) {
                     jQuery.ajax( {
                         type: "POST",
