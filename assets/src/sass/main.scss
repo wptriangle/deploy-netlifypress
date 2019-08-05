@@ -82,6 +82,12 @@
                         color: #fff;
                     }
                 }
+
+                &.disabled {
+                    opacity: 0.5;
+                    filter: grayscale( 100% );
+                    -webkit-filter: grayscale( 100% );
+                }
             }
         }
 
