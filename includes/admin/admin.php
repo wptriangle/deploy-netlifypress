@@ -7,6 +7,10 @@
  * @author     Nahid Ferdous Mohit
  */
 
+/*
+ * Add the admin menu
+ */
+
 add_action( 'admin_menu', 'netlifypress_setup_options_page' );
 function netlifypress_setup_options_page() {
     $page_title = __( 'NetlifyPress', 'netlifypress' );
@@ -21,8 +25,12 @@ function netlifypress_setup_options_page() {
     $netlifypress_options_page = add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
 }
 
+/*
+ * Admin Page Display
+ */
+
 function netlifypress_options_page_display() {
-    if ( !current_user_can( 'manage_options' ) ) {
+    if ( ! current_user_can( 'manage_options' ) ) {
         wp_die( 'Unauthorized user' );
     }
     ?>
