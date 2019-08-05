@@ -71,6 +71,7 @@ add_action( 'init', 'netlifypress_frontend_button_icon' );
 function netlifypress_frontend_button_icon() {
     if ( current_user_can( 'manage_options' ) && is_admin_bar_showing() ) {
         add_action( 'wp_footer', 'netlifypress_frontend_button_icon_styles' );
+        add_action( 'admin_footer', 'netlifypress_frontend_button_icon_styles' );
     }
 }
 
