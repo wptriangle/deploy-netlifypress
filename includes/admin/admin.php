@@ -124,78 +124,80 @@ function netlifypress_options_page_display() {
                                             </div>
                                         </div>
 
-                                        <div class="form-group auto-deploy-action-form-group">
-                                            <h3><?php _e( 'Actions', 'netlifypress' ); ?></h3>
-                                            <p><?php _e( 'Specify actions when automatic deployment should trigger', 'netlifypress' ); ?></p>
+                                        <?php if ( get_option( 'auto_deploy' ) == 'on' ) { ?>
+                                            <div class="form-group auto-deploy-action-form-group">
+                                                <h3><?php _e( 'Actions', 'netlifypress' ); ?></h3>
+                                                <p><?php _e( 'Specify actions when automatic deployment should trigger', 'netlifypress' ); ?></p>
 
-                                            <?php
-                                                $valid_auto_deploy_actions = array(
-                                                    'publish',
-                                                    'update',
-                                                    'trash'
-                                                );
+                                                <?php
+                                                    $valid_auto_deploy_actions = array(
+                                                        'publish',
+                                                        'update',
+                                                        'trash'
+                                                    );
 
-                                                if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
-                                                    $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
+                                                    if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
+                                                        $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
 
-                                                    if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
-                                                        update_option( 'action_auto_deploy', $action_auto_deploy );
+                                                        if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
+                                                            update_option( 'action_auto_deploy', $action_auto_deploy );
+                                                        }
                                                     }
-                                                }
-                                            ?>
+                                                ?>
 
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="action_auto_deploy_all" <?php echo ( $valid_auto_deploy_actions == get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
-                                                <label class="custom-control-label" for="action_auto_deploy_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="action_auto_deploy_all" <?php echo ( $valid_auto_deploy_actions == get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
+                                                    <label class="custom-control-label" for="action_auto_deploy_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
+                                                </div>
+
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="action_auto_deploy_publish" name="action_auto_deploy[]" value="publish" <?php echo in_array( 'publish', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
+                                                    <label class="custom-control-label" for="action_auto_deploy_publish"> <?php _e( 'On post publish', 'netlifypress' ); ?></label>
+                                                </div>
+
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="action_auto_deploy_update" name="action_auto_deploy[]" value="update" <?php echo in_array( 'update', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
+                                                    <label class="custom-control-label" for="action_auto_deploy_update"> <?php _e( 'On post update', 'netlifypress' ); ?></label>
+                                                </div>
+                                            
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="action_auto_deploy_trash" name="action_auto_deploy[]" value="trash" <?php echo in_array( 'trash', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
+                                                    <label class="custom-control-label" for="action_auto_deploy_trash"> <?php _e( 'On post trash', 'netlifypress' ); ?></label>
+                                                </div>
                                             </div>
 
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="action_auto_deploy_publish" name="action_auto_deploy[]" value="publish" <?php echo in_array( 'publish', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
-                                                <label class="custom-control-label" for="action_auto_deploy_publish"> <?php _e( 'On post publish', 'netlifypress' ); ?></label>
-                                            </div>
+                                            <div class="form-group post-types-form-group">
+                                                <h3><?php _e( 'Post Types', 'netlifypress' ); ?></h3>
+                                                <p><?php _e( 'Specify post types where the above actions should apply', 'netlifypress' ); ?></p>
 
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="action_auto_deploy_update" name="action_auto_deploy[]" value="update" <?php echo in_array( 'update', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
-                                                <label class="custom-control-label" for="action_auto_deploy_update"> <?php _e( 'On post update', 'netlifypress' ); ?></label>
-                                            </div>
-                                        
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="action_auto_deploy_trash" name="action_auto_deploy[]" value="trash" <?php echo in_array( 'trash', get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
-                                                <label class="custom-control-label" for="action_auto_deploy_trash"> <?php _e( 'On post trash', 'netlifypress' ); ?></label>
-                                            </div>
-                                        </div>
+                                                <?php
+                                                    $valid_post_types = get_post_types();
 
-                                        <div class="form-group post-types-form-group">
-                                            <h3><?php _e( 'Post Types', 'netlifypress' ); ?></h3>
-                                            <p><?php _e( 'Specify post types where the above actions should apply', 'netlifypress' ); ?></p>
+                                                    if ( isset( $_POST[ 'post_types' ] ) ) {
+                                                        $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
 
-                                            <?php
-                                                $valid_post_types = get_post_types();
-
-                                                if ( isset( $_POST[ 'post_types' ] ) ) {
-                                                    $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
-
-                                                    if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
-                                                        update_option( 'post_types', $set_post_type );
+                                                        if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
+                                                            update_option( 'post_types', $set_post_type );
+                                                        }
                                                     }
-                                                }
-                                            ?>
+                                                ?>
 
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="post_type_all" <?php echo ( array_diff( get_post_types(), get_option( 'post_types' ) ) === array_diff( get_option( 'post_types' ), get_post_types() ) ) ? 'checked' : ''; ?>>
-                                                <label class="custom-control-label" for="post_type_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="post_type_all" <?php echo ( array_diff( get_post_types(), get_option( 'post_types' ) ) === array_diff( get_option( 'post_types' ), get_post_types() ) ) ? 'checked' : ''; ?>>
+                                                    <label class="custom-control-label" for="post_type_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
+                                                </div>
+                                                <?php
+                                                    foreach ( get_post_types( '', 'objects' ) as $post_type ) {
+                                                        ?>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input" id="post_type_<?php echo $post_type->name; ?>" name="post_types[]" value="<?php echo $post_type->name; ?>" <?php echo in_array( $post_type->name, get_option( 'post_types' ) ) ? 'checked' : ''; ?>>
+                                                            <label class="custom-control-label" for="post_type_<?php echo $post_type->name; ?>"> <?php echo $post_type->label; ?></label>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                ?>
                                             </div>
-                                            <?php
-                                                foreach ( get_post_types( '', 'objects' ) as $post_type ) {
-                                                    ?>
-                                                    <div class="custom-control custom-switch">
-                                                        <input type="checkbox" class="custom-control-input" id="post_type_<?php echo $post_type->name; ?>" name="post_types[]" value="<?php echo $post_type->name; ?>" <?php echo in_array( $post_type->name, get_option( 'post_types' ) ) ? 'checked' : ''; ?>>
-                                                        <label class="custom-control-label" for="post_type_<?php echo $post_type->name; ?>"> <?php echo $post_type->label; ?></label>
-                                                    </div>
-                                                    <?php
-                                                }
-                                            ?>
-                                        </div>
+                                        <?php } ?>
                                     </fieldset>    
                                 </div>
 
