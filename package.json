@@ -18,6 +18,7 @@
  },
  "homepage": "https://github.com/nfmohit-wpmudev/netlifypress#readme",
  "devDependencies": {
+  "@fortawesome/fontawesome-free": "^5.10.1",
   "css-loader": "^1.0.0",
   "extract-text-webpack-plugin": "^4.0.0-beta.0",
   "file-loader": "^1.1.11",
