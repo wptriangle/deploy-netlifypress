@@ -21,9 +21,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( get_option( 'netlifypress_build_hook_url' ) ) {
 
-    if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) || in_array( 'trash', get_option( 'action_auto_deploy' ) ) ) {
-        add_action( 'save_post', 'deploy_trigger', 10, 2 );
+    /* Initialize the trigger */
+
+    add_action( 'init', 'netlifypress_auto_deploy_initialize' );
+    function netlifypress_auto_deploy_initialize() {
+        if ( current_user_can( 'manage_options' ) && ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) || in_array( 'update', get_option( 'action_auto_deploy' ) ) || in_array( 'trash', get_option( 'action_auto_deploy' ) ) ) ) {
+            add_action( 'save_post', 'deploy_trigger', 10, 2 );
+        }
     }
+
+    /* Auto Deploy Trigger */
 
     function deploy_trigger( $post_id, $post ) {
 
@@ -42,9 +49,13 @@ if ( get_option( 'netlifypress_build_hook_url' ) ) {
                     return;
                 }
 
+                /* Publish Action */
+
                 if ( in_array( 'publish', get_option( 'action_auto_deploy' ) ) && $post->post_date === $post->post_modified ) {
 
                     wp_remote_post( get_option( 'netlifypress_build_hook_url' ) . '?trigger_title=' . $post->post_title . ' was published' );
+
+                /* Update Action */    
 
                 } elseif ( in_array( 'update', get_option( 'action_auto_deploy' ) ) && $post->post_date != $post->post_modified ) {
 
