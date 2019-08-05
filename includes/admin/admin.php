@@ -36,17 +36,34 @@ function netlifypress_options_page_display() {
     ?>
         <div class="netlifypress-admin-wrapper">
             <div class="container">
+                <header>
+                    <h1><?php echo __( 'NetlifyPress', 'netlifypress' ); ?></h1>
+                    <?php
+                        $plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/netlifypress/netlifypress.php' );
+                    ?>
+                    <span class="plugin-version"><?php echo __( 'v', 'netlifypress' ) . $plugin_data[ 'Version' ]; ?></span>
+                    <p><?php echo __( 'Seamlessly trigger deploys in Netlify from WordPress', 'netlifypress' ); ?></p>
+                </header>
                 <form method="post">
 
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="connect-netlify-tab" data-toggle="tab" href="#connect-netlify" role="tab" aria-controls="connect-netlify" aria-selected="true"><?php _e( 'Connect with Netlify', 'netlifypress' ); ?></a>
+                            <a class="nav-link active" id="connect-netlify-tab" data-toggle="tab" href="#connect-netlify" role="tab" aria-controls="connect-netlify" aria-selected="true">
+                                <i class="fas fa-link"></i>
+                                <?php _e( 'Connect with Netlify', 'netlifypress' ); ?>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="deploy-configuration-tab" data-toggle="tab" href="#automatic-deployment" role="tab" aria-controls="automatic-deployment" aria-selected="false"><?php _e( 'Automatic Deployment', 'netlifypress' ); ?></a>
+                            <a class="nav-link" id="deploy-configuration-tab" data-toggle="tab" href="#automatic-deployment" role="tab" aria-controls="automatic-deployment" aria-selected="false">
+                                <i class="fas fa-robot"></i>
+                                <?php _e( 'Automatic Deployment', 'netlifypress' ); ?>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="manual-configuration-tab" data-toggle="tab" href="#manual-deployment" role="tab" aria-controls="manual-deployment" aria-selected="false"><?php _e( 'Manual Deployment', 'netlifypress' ); ?></a>
+                            <a class="nav-link" id="manual-configuration-tab" data-toggle="tab" href="#manual-deployment" role="tab" aria-controls="manual-deployment" aria-selected="false">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <?php _e( 'Manual Deployment', 'netlifypress' ); ?>
+                            </a>
                         </li>
                     </ul>
 
