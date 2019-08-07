@@ -44,7 +44,7 @@ function netlifypress_options_page_display() {
                     <span class="plugin-version"><?php echo __( 'v', 'netlifypress' ) . $plugin_data[ 'Version' ]; ?></span>
                     <p><?php echo __( 'Seamlessly trigger deploys in Netlify from WordPress', 'netlifypress' ); ?></p>
                 </header>
-                <form method="post">
+                <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 
                     <div class="row">
                         <ul class="netlifypress-admin-tabs nav col-md-4" role="tablist">
@@ -74,7 +74,7 @@ function netlifypress_options_page_display() {
                             </li>
 
                             <div class="netlifypress-save-settings">
-                                <input type="hidden" name="action" value="update" />
+                                <input type="hidden" name="action" value="netlifypress_options" />
                                 <?php wp_nonce_field( 'netlifypress_update_action' ); ?>
                                 <button type="submit" class="btn btn-primary"><?php _e( 'Save Changes', 'netlifypress' ); ?></button>
                             </div>
@@ -86,11 +86,6 @@ function netlifypress_options_page_display() {
                                     <div class="form-group">
                                         <h2><?php _e( 'Connect with Netlify', 'netlifypress' ); ?></h3>
                                         <p><?php _e( 'Enter your Netlify webhook URL to tell WordPress where to trigger deploys', 'netlifypress' ); ?></p>
-                                        <?php
-                                            if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
-                                                update_option( 'netlifypress_build_hook_url', esc_url_raw( $_POST[ 'netlifypress_build_hook_url' ] ) );
-                                            }
-                                        ?>
                                         <label for="netlifypress_build_hook_url"><?php _e( 'Build Hook URL', 'netlifypress' ); ?></label>
                                         <input type="url" name="netlifypress_build_hook_url" id="netlifypress_build_hook_url" placeholder="e.g. https://api.netlify.com/build_hooks/XXXXXXXXXXXX" class="form-control" value="<?php echo esc_url( get_option( 'netlifypress_build_hook_url' ) ); ?>" required>
                                     </div>
@@ -103,21 +98,8 @@ function netlifypress_options_page_display() {
                                         <div class="form-group">
                                             <h2><?php _e( 'Automatic Deployment', 'netlifypress' ); ?></h3>
                                             <p><?php _e( 'Turn on if you want to trigger automated deploys on post actions', 'netlifypress' ); ?></p>
-                                            <div class="custom-control custom-switch">
-                                                <?php
-                                                    $valid_auto_deploy_statuses = array(
-                                                        'off',
-                                                        'on'
-                                                    );
 
-                                                    if ( isset( $_POST[ 'auto_deploy' ] ) ) {
-                                                        $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
-            
-                                                        if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
-                                                            update_option( 'auto_deploy', $auto_deploy_status );
-                                                        }
-                                                    }
-                                                ?>
+                                            <div class="custom-control custom-switch">
                                                 <input type="hidden" name="auto_deploy" value="off">
                                                 <input type="checkbox" class="custom-control-input" id="auto_deploy" name="auto_deploy" value="on" <?php echo checked( 'on', get_option( 'auto_deploy' ), true  ); ?>>
                                                 <label class="custom-control-label" for="auto_deploy"> <?php _e( 'On', 'netlifypress' ); ?></label>
@@ -151,16 +133,7 @@ function netlifypress_options_page_display() {
                                                         'update',
                                                         'trash'
                                                     );
-
-                                                    if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
-                                                        $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
-
-                                                        if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
-                                                            update_option( 'action_auto_deploy', $action_auto_deploy );
-                                                        }
-                                                    }
                                                 ?>
-
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input" id="action_auto_deploy_all" <?php echo ( $valid_auto_deploy_actions == get_option( 'action_auto_deploy' ) ) ? 'checked' : ''; ?>>
                                                     <label class="custom-control-label" for="action_auto_deploy_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
@@ -186,18 +159,6 @@ function netlifypress_options_page_display() {
                                                 <h3><?php _e( 'Post Types', 'netlifypress' ); ?></h3>
                                                 <p><?php _e( 'Specify post types where the above actions should apply', 'netlifypress' ); ?></p>
 
-                                                <?php
-                                                    $valid_post_types = get_post_types();
-
-                                                    if ( isset( $_POST[ 'post_types' ] ) ) {
-                                                        $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
-
-                                                        if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
-                                                            update_option( 'post_types', $set_post_type );
-                                                        }
-                                                    }
-                                                ?>
-
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input" id="post_type_all" <?php echo ( array_diff( get_post_types(), get_option( 'post_types' ) ) === array_diff( get_option( 'post_types' ), get_post_types() ) ) ? 'checked' : ''; ?>>
                                                     <label class="custom-control-label" for="post_type_all"> <?php _e( 'All', 'netlifypress' ); ?></label>
@@ -222,21 +183,8 @@ function netlifypress_options_page_display() {
                                         <div class="form-group">
                                             <h2><?php _e( 'Manual Deployment', 'netlifypress' ); ?></h3>
                                             <p><?php _e( 'Turn on if you want to have a manual deployment button on your top bar', 'netlifypress' ); ?></p>
-                                            <div class="custom-control custom-switch">
-                                                <?php
-                                                    $valid_manual_deploy_statuses = array(
-                                                        'off',
-                                                        'on'
-                                                    );
 
-                                                    if ( isset( $_POST[ 'manual_deploy' ] ) ) {
-                                                        $manual_deploy_status = sanitize_text_field( $_POST[ 'manual_deploy' ] );
-            
-                                                        if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
-                                                            update_option( 'manual_deploy', $manual_deploy_status );
-                                                        }
-                                                    }
-                                                ?>
+                                            <div class="custom-control custom-switch">
                                                 <input type="hidden" name="manual_deploy" value="off">
                                                 <input type="checkbox" class="custom-control-input" id="manual_deploy" name="manual_deploy" value="on" <?php echo checked( 'on', get_option( 'manual_deploy' ), true  ); ?>>
                                                 <label class="custom-control-label" for="manual_deploy"> <?php _e( 'On', 'netlifypress' ); ?></label>
@@ -251,4 +199,85 @@ function netlifypress_options_page_display() {
             </div>
         </div>
     <?php
+}
+
+/* 
+ * After form submit
+*/
+
+add_action( 'admin_post_netlifypress_options', 'netlifypress_options_response' );
+function netlifypress_options_response() {
+
+    /* 
+     * Form Sanitization and Processing
+     */
+
+    /* Webhook URL */
+ 
+    if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
+        update_option( 'netlifypress_build_hook_url', esc_url_raw( $_POST[ 'netlifypress_build_hook_url' ] ) );
+    }
+
+    /* Auto Deploy Status */
+
+    $valid_auto_deploy_statuses = array(
+        'off',
+        'on'
+    );
+
+    if ( isset( $_POST[ 'auto_deploy' ] ) ) {
+        $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
+
+        if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
+            update_option( 'auto_deploy', $auto_deploy_status );
+        }
+    }
+
+    /* Auto Deploy Actions */
+
+    $valid_auto_deploy_actions = array(
+        'publish',
+        'update',
+        'trash'
+    );
+
+    if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
+        $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
+
+        if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
+            update_option( 'action_auto_deploy', $action_auto_deploy );
+        }
+    }
+
+    /* Auto Deploy Post Types */
+
+    $valid_post_types = get_post_types();
+
+    if ( isset( $_POST[ 'post_types' ] ) ) {
+        $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
+
+        if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
+            update_option( 'post_types', $set_post_type );
+        }
+    }
+
+    /* Manual Deploy Status */
+
+    $valid_manual_deploy_statuses = array(
+        'off',
+        'on'
+    );
+
+    if ( isset( $_POST[ 'manual_deploy' ] ) ) {
+        $manual_deploy_status = sanitize_text_field( $_POST[ 'manual_deploy' ] );
+
+        if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
+            update_option( 'manual_deploy', $manual_deploy_status );
+        }
+    }
+
+    /* Redirect back to admin page */
+
+    wp_redirect( $_SERVER['HTTP_REFERER'] );
+    exit;
 }
