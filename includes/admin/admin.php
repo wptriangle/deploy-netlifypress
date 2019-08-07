@@ -283,7 +283,26 @@ function netlifypress_options_response() {
 
         /* Redirect back to admin page */
 
-        wp_redirect( $_SERVER['HTTP_REFERER'] );
+        wp_redirect( 
+            esc_url_raw( 
+                add_query_arg( array(
+                    'netlifypress_admin_notice' => 'success',
+                ),
+                admin_url( 'admin.php?page=netlifypress_options' ) 
+                )
+            )
+        );
         exit;
+    }
+}
+
+add_action( 'admin_notices', 'netlifypress_admin_notices' );
+function netlifypress_admin_notices() {
+    if ( isset( $_REQUEST[ 'netlifypress_admin_notice' ] ) ) {
+        if( $_REQUEST[ 'netlifypress_admin_notice' ] === 'success' ) {
+            echo '<div class="updated notice notice-success is-dismissible"> 
+                    <p>Settings updated.</p>
+                </div>';
+        }
     }
 }
