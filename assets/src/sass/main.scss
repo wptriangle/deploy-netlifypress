@@ -37,7 +37,7 @@
 
     /* Tabs */
 
-    ul.nav {
+    ul.netlifypress-admin-tabs {
         display: block;
         margin-bottom: 50px;
 
@@ -52,24 +52,24 @@
                 .row {
                     border: 1px solid #00C7B7;
                     margin: 0;
-                }
 
-                .tab-icon {
-                    background-color: #00C7B7;
-                    color: #fff;
-                    padding: 15px 15px 15px 13px;
+                    .tab-icon {
+                        background-color: #00C7B7;
+                        color: #fff;
+                        padding: 15px 15px 15px 13px;
 
-                    svg {
-                        display: block;
-                        width: 40px;
-                        height: 40px;
+                        svg {
+                            display: block;
+                            width: 40px;
+                            height: 40px;
+                        }
                     }
-                }
 
-                .tab-label {
-                    text-align: center;
-                    margin-top: auto;
-                    margin-bottom: auto;
+                    .tab-label {
+                        text-align: center;
+                        margin-top: auto;
+                        margin-bottom: auto;
+                    }
                 }
 
                 &.active,

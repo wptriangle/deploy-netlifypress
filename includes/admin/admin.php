@@ -47,7 +47,7 @@ function netlifypress_options_page_display() {
                 <form method="post">
 
                     <div class="row">
-                        <ul class="nav col-md-4" role="tablist">
+                        <ul class="netlifypress-admin-tabs nav col-md-4" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="connect-netlify-tab" data-toggle="tab" href="#connect-netlify" role="tab" aria-controls="connect-netlify" aria-selected="true">
                                     <div class="row">
