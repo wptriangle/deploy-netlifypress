@@ -281,7 +281,7 @@ function netlifypress_options_response() {
             }
         }
 
-        /* Redirect back to admin page */
+        /* Redirect back to admin page with query strings for admin notices */
 
         wp_redirect( 
             esc_url_raw( 
@@ -295,6 +295,10 @@ function netlifypress_options_response() {
         exit;
     }
 }
+
+/* 
+ * Admin Notice(s)
+*/
 
 add_action( 'admin_notices', 'netlifypress_admin_notices' );
 function netlifypress_admin_notices() {
