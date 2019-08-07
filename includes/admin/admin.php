@@ -75,7 +75,10 @@ function netlifypress_options_page_display() {
 
                             <div class="netlifypress-save-settings">
                                 <input type="hidden" name="action" value="netlifypress_options" />
-                                <?php wp_nonce_field( 'netlifypress_update_action' ); ?>
+                                <?php
+                                    $netlifypress_admin_nonce = wp_create_nonce( 'netlifypress_admin_nonce' );
+                                ?>
+                                <input type="hidden" name="netlifypress_admin_nonce" value="<?php echo $netlifypress_admin_nonce; ?>" />
                                 <button type="submit" class="btn btn-primary"><?php _e( 'Save Changes', 'netlifypress' ); ?></button>
                             </div>
                         </ul>
@@ -208,76 +211,79 @@ function netlifypress_options_page_display() {
 add_action( 'admin_post_netlifypress_options', 'netlifypress_options_response' );
 function netlifypress_options_response() {
 
-    /* 
-     * Form Sanitization and Processing
-     */
+    if( isset( $_POST['netlifypress_admin_nonce'] ) && wp_verify_nonce( $_POST['netlifypress_admin_nonce'], 'netlifypress_admin_nonce') ) {
 
-    /* Webhook URL */
- 
-    if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
-        update_option( 'netlifypress_build_hook_url', esc_url_raw( $_POST[ 'netlifypress_build_hook_url' ] ) );
-    }
+        /* 
+            * Form Sanitization and Processing
+            */
 
-    /* Auto Deploy Status */
+        /* Webhook URL */
 
-    $valid_auto_deploy_statuses = array(
-        'off',
-        'on'
-    );
-
-    if ( isset( $_POST[ 'auto_deploy' ] ) ) {
-        $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
-
-        if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
-            update_option( 'auto_deploy', $auto_deploy_status );
+        if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
+            update_option( 'netlifypress_build_hook_url', esc_url_raw( $_POST[ 'netlifypress_build_hook_url' ] ) );
         }
-    }
 
-    /* Auto Deploy Actions */
+        /* Auto Deploy Status */
 
-    $valid_auto_deploy_actions = array(
-        'publish',
-        'update',
-        'trash'
-    );
+        $valid_auto_deploy_statuses = array(
+            'off',
+            'on'
+        );
 
-    if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
-        $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
+        if ( isset( $_POST[ 'auto_deploy' ] ) ) {
+            $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
 
-        if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
-            update_option( 'action_auto_deploy', $action_auto_deploy );
+            if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
+                update_option( 'auto_deploy', $auto_deploy_status );
+            }
         }
-    }
 
-    /* Auto Deploy Post Types */
+        /* Auto Deploy Actions */
 
-    $valid_post_types = get_post_types();
+        $valid_auto_deploy_actions = array(
+            'publish',
+            'update',
+            'trash'
+        );
 
-    if ( isset( $_POST[ 'post_types' ] ) ) {
-        $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
+        if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
+            $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
 
-        if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
-            update_option( 'post_types', $set_post_type );
+            if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
+                update_option( 'action_auto_deploy', $action_auto_deploy );
+            }
         }
-    }
 
-    /* Manual Deploy Status */
+        /* Auto Deploy Post Types */
 
-    $valid_manual_deploy_statuses = array(
-        'off',
-        'on'
-    );
+        $valid_post_types = get_post_types();
 
-    if ( isset( $_POST[ 'manual_deploy' ] ) ) {
-        $manual_deploy_status = sanitize_text_field( $_POST[ 'manual_deploy' ] );
+        if ( isset( $_POST[ 'post_types' ] ) ) {
+            $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
 
-        if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
-            update_option( 'manual_deploy', $manual_deploy_status );
+            if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
+                update_option( 'post_types', $set_post_type );
+            }
         }
+
+        /* Manual Deploy Status */
+
+        $valid_manual_deploy_statuses = array(
+            'off',
+            'on'
+        );
+
+        if ( isset( $_POST[ 'manual_deploy' ] ) ) {
+            $manual_deploy_status = sanitize_text_field( $_POST[ 'manual_deploy' ] );
+
+            if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
+                update_option( 'manual_deploy', $manual_deploy_status );
+            }
+        }
+
+        /* Redirect back to admin page */
+
+        wp_redirect( $_SERVER['HTTP_REFERER'] );
+        exit;
     }
-
-    /* Redirect back to admin page */
-
-    wp_redirect( $_SERVER['HTTP_REFERER'] );
-    exit;
 }
