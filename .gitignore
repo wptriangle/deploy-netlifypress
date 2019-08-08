@@ -2,6 +2,7 @@
 
 assets/dist
 node_modules
+.vscode
 
 # Directories/files that may appear in your environment
 
