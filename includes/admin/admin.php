@@ -214,8 +214,8 @@ function netlifypress_options_response() {
     if( isset( $_POST['netlifypress_admin_nonce'] ) && wp_verify_nonce( $_POST['netlifypress_admin_nonce'], 'netlifypress_admin_nonce') ) {
 
         /* 
-            * Form Sanitization and Processing
-            */
+        * Form Sanitization and Processing
+        */
 
         /* Webhook URL */
 
@@ -283,8 +283,8 @@ function netlifypress_options_response() {
 
         /* Redirect back to admin page with query strings for admin notices */
 
-        wp_redirect( 
-            esc_url_raw( 
+        wp_redirect(
+            esc_url_raw(
                 add_query_arg( array(
                     'netlifypress_admin_notice' => 'success',
                 ),
