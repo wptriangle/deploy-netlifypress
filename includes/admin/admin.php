@@ -219,65 +219,105 @@ function netlifypress_options_response() {
 
         /* Webhook URL */
 
-        if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
+        if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) && ! empty( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
             update_option( 'netlifypress_build_hook_url', esc_url_raw( $_POST[ 'netlifypress_build_hook_url' ] ) );
         }
 
-        /* Auto Deploy Status */
+        /* Default Options */
 
-        $valid_auto_deploy_statuses = array(
-            'off',
-            'on'
-        );
+        if ( ! empty( get_option( 'netlifypress_build_hook_url' ) ) ) {
 
-        if ( isset( $_POST[ 'auto_deploy' ] ) ) {
-            $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
-
-            if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
-                update_option( 'auto_deploy', $auto_deploy_status );
+            /* Auto Deploy Status */
+    
+            add_option( 'auto_deploy', 'on' );
+    
+            /* Make sure auto deploy is on before other settings are processed */
+    
+            if ( get_option( 'auto_deploy' ) == 'on' ) {
+    
+                /* Auto Deploy Actions */
+    
+                add_option( 'action_auto_deploy', array(
+                    'publish',
+                    'update',
+                    'trash'
+                ) );
+    
+                /* Auto Deploy Post Types */
+    
+                add_option( 'post_types', get_post_types() );
             }
+    
+            /* Manual Deploy Status */
+    
+            add_option( 'manual_deploy', 'on' );
         }
 
-        /* Auto Deploy Actions */
+        /* Make sure webhook URL is set before other settings are processed */
 
-        $valid_auto_deploy_actions = array(
-            'publish',
-            'update',
-            'trash'
-        );
+        if ( ! empty( get_option( 'netlifypress_build_hook_url' ) ) ) {
 
-        if ( isset( $_POST[ 'action_auto_deploy' ] ) ) {
-            $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
+            /* Auto Deploy Status */
 
-            if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
-                update_option( 'action_auto_deploy', $action_auto_deploy );
+            $valid_auto_deploy_statuses = array(
+                'off',
+                'on'
+            );
+
+            if ( isset( $_POST[ 'auto_deploy' ] ) && ! empty( $_POST[ 'auto_deploy' ] )  ) {
+                $auto_deploy_status = sanitize_text_field( $_POST[ 'auto_deploy' ] );
+
+                if ( in_array( $auto_deploy_status, $valid_auto_deploy_statuses ) ) {
+                    update_option( 'auto_deploy', $auto_deploy_status );
+                }
             }
-        }
 
-        /* Auto Deploy Post Types */
+            /* Make sure auto deploy is on before other settings are processed */
+    
+            if ( get_option( 'auto_deploy' ) == 'on' ) {
 
-        $valid_post_types = get_post_types();
+                /* Auto Deploy Actions */
 
-        if ( isset( $_POST[ 'post_types' ] ) ) {
-            $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
+                $valid_auto_deploy_actions = array(
+                    'publish',
+                    'update',
+                    'trash'
+                );
 
-            if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
-                update_option( 'post_types', $set_post_type );
+                if ( isset( $_POST[ 'action_auto_deploy' ] ) && ! empty( $_POST[ 'action_auto_deploy' ] ) ) {
+                    $action_auto_deploy = array_map( 'sanitize_text_field', $_POST[ 'action_auto_deploy' ] );
+
+                    if ( ! empty( array_intersect( $action_auto_deploy, $valid_auto_deploy_actions ) ) ) {
+                        update_option( 'action_auto_deploy', $action_auto_deploy );
+                    }
+                }
+
+                /* Auto Deploy Post Types */
+
+                $valid_post_types = get_post_types();
+
+                if ( isset( $_POST[ 'post_types' ] ) && ! empty( $_POST[ 'post_types' ] ) ) {
+                    $set_post_type = array_map( 'sanitize_text_field', $_POST[ 'post_types' ] );
+
+                    if ( ! empty( array_intersect( $set_post_type, $valid_post_types ) ) ) {
+                        update_option( 'post_types', $set_post_type );
+                    }
+                }
             }
-        }
 
-        /* Manual Deploy Status */
+            /* Manual Deploy Status */
 
-        $valid_manual_deploy_statuses = array(
-            'off',
-            'on'
-        );
+            $valid_manual_deploy_statuses = array(
+                'off',
+                'on'
+            );
 
-        if ( isset( $_POST[ 'manual_deploy' ] ) ) {
-            $manual_deploy_status = sanitize_text_field( $_POST[ 'manual_deploy' ] );
+            if ( isset( $_POST[ 'manual_deploy' ] ) && ! empty( $_POST[ 'manual_deploy' ] ) ) {
+                $manual_deploy_status = sanitize_text_field( $_POST[ 'manual_deploy' ] );
 
-            if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
-                update_option( 'manual_deploy', $manual_deploy_status );
+                if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
+                    update_option( 'manual_deploy', $manual_deploy_status );
+                }
             }
         }
 
