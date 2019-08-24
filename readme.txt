@@ -51,6 +51,14 @@ Installation of the **NetlifyPress** plugin is very simple. Follow along with th
 ### Support
 If the above usage steps don't answer your question(s), if you want to report an issue or if something is not working as expected, please create a topic in the [Support Forum](https://wordpress.org/support/plugin/netlifypress/).
 
+### Roadmap
+I have plans for the following features/improvements in the coming days (subject to user feedback and usage):
+1. Admin options migration to Settings API with Ajax support.
+2. Success/failure message on auto deploy trigger.
+3. Success/failure message on auto deploy status (after completion).
+4. Scheduled deployments.
+5. Deployment logs.
+
 ### Contribute
 If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit-wpmudev/netlifypress).
 
