@@ -4,8 +4,8 @@
  "description": "Seamlessly trigger deploys in Netlify from WordPress",
  "main": "assets/src/js/main.js",
  "scripts": {
-  "build": "webpack",
-  "dev": "webpack --watch"
+  "build": "webpack -p",
+  "dev": "webpack -p --watch"
  },
  "repository": {
   "type": "git",
