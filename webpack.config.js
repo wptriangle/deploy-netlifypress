@@ -59,5 +59,9 @@ module.exports = {
 		new ExtractTextPlugin('../css/main.min.css', {
             allChunks: true
         })
-	]
+	],
+
+	externals: {
+		jquery: 'jQuery'
+	}
 };
