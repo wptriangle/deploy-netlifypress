@@ -1,1 +1,1 @@
-# NetlifyPress
+# Deploy with NetlifyPress

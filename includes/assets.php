@@ -3,7 +3,7 @@
  * Enqueue and handle assets
  *
  * @since      1.0
- * @package    NetlifyPress
+ * @package    Deploy with NetlifyPress
  * @author     Nahid Ferdous Mohit
  */
 

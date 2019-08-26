@@ -1,4 +1,4 @@
-=== NetlifyPress ===
+=== Deploy with NetlifyPress ===
 Contributors: nfmohit
 Donate link: https://www.patreon.com/nfmohit
 Tags: netlify, automation, deployment
@@ -13,12 +13,12 @@ Seamlessly trigger deploys in Netlify from WordPress.
 
 == Description ==
 
-Instead of going into [Netlify](https://netlify.com) and triggering a deploy everytime you make a change in WordPress, automate and make things easier with the **NetlifyPress** plugin. **NetlifyPress** lets you trigger deploys in [Netlify](https://netlify.com) (automatically!) without having to leave your WordPress Dashboard.
+Instead of going into [Netlify](https://netlify.com) and triggering a deploy everytime you make a change in WordPress, automate and make things easier with the **Deploy with NetlifyPress** plugin. **Deploy with NetlifyPress** lets you trigger deploys in [Netlify](https://netlify.com) (automatically!) without having to leave your WordPress Dashboard.
 
 ### Use Cases
-So, you've build a headless static front-end for your WordPress site and hosted it on [Netlify](https://netlify.com), good job! Wondering how would you trigger a deploy in [Netlify](https://netlify.com) everytime someone updates a post in WordPress? Forget going inside everytime an update is made and triggering a build manually, install **NetlifyPress** and let it run a deploy for you automatically on each update.
+So, you've build a headless static front-end for your WordPress site and hosted it on [Netlify](https://netlify.com), good job! Wondering how would you trigger a deploy in [Netlify](https://netlify.com) everytime someone updates a post in WordPress? Forget going inside everytime an update is made and triggering a build manually, install **Deploy with NetlifyPress** and let it run a deploy for you automatically on each update.
 
-If you're looking for a real-life example, I've build my personal site [nahid.dev](https://nahid.dev) ([GitHub](https://github.com/nfmohit-wpmudev/nahid.dev)) using [GatsbyJS](https://www.gatsbyjs.org/) with its source as WordPress and am hosting it on [Netlify](https://netlify.com). I use **NetlifyPress** to automate deploys when I update pages and posts.
+If you're looking for a real-life example, I've build my personal site [nahid.dev](https://nahid.dev) ([GitHub](https://github.com/nfmohit-wpmudev/nahid.dev)) using [GatsbyJS](https://www.gatsbyjs.org/) with its source as WordPress and am hosting it on [Netlify](https://netlify.com). I use **Deploy with NetlifyPress** to automate deploys when I update pages and posts.
 
 ### Core Features
 The core features of the plugin include the abilities to:
@@ -31,15 +31,15 @@ The core features of the plugin include the abilities to:
 ### Requirements
 This plugin requires you have a site hosted on Netlify and a Build Webhook URL set up. Here's how you can get a Build Hook URL:
 1. Log into [Netlify](https://app.netlify.com/).
-2. From the list of sites, enter the site you want to set up **NetlifyPress** for.
+2. From the list of sites, enter the site you want to set up **Deploy with NetlifyPress** for.
 3. Go to *Site settings*.
 4. From the left sidebar, go to *Build and deploy→Continuous Deployment*.
 5. Scroll down to the "*Build hooks*" section.
 6. Click the "*Add build hook*" button, enter a preferred name for the webhook (e.g. "Deploy from WordPress"), choose the [Git](https://git-scm.com/) branch to build and hit *Save*.
-7. You'll be given a Build Hook URL that can be used in **NetlifyPress**.
+7. You'll be given a Build Hook URL that can be used in **Deploy with NetlifyPress**.
 
 ### Installation
-Installation of the **NetlifyPress** plugin is very simple. Follow along with the installation procedure in the dedicated [**Installation** tab](#installation).
+Installation of the **Deploy with NetlifyPress** plugin is very simple. Follow along with the installation procedure in the dedicated [**Installation** tab](#installation).
 
 ### Usage
 1. [Install](#installation) and activate the plugin
@@ -60,7 +60,7 @@ I have plans for the following features/improvements in the coming days (subject
 5. Deployment logs.
 
 ### Contribute
-If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit-wpmudev/netlifypress).
+If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit-wpmudev/deploy-with-netlifypress).
 
 ### Sponsor
 You can sponsor this project and support my open-source development by [becoming a Patron](https://www.patreon.com/nfmohit)!
@@ -70,17 +70,17 @@ You can sponsor this project and support my open-source development by [becoming
 ### Requirements
 This plugin requires you have a site hosted on Netlify and a Build Webhook URL set up. Here's how you can get a Build Hook URL:
 1. Log into [Netlify](https://app.netlify.com/).
-2. From the list of sites, enter the site you want to set up **NetlifyPress** for.
+2. From the list of sites, enter the site you want to set up **Deploy with NetlifyPress** for.
 3. Go to *Site settings*.
 4. From the left sidebar, go to *Build and deploy→Continuous Deployment*.
 5. Scroll down to the "*Build hooks*" section.
 6. Click the *Add build hook* button, enter a preferred name for the webhook (e.g. "Deploy from WordPress"), choose the [Git](https://git-scm.com/) branch to build and hit *Save*.
-7. You'll be given a Build Hook URL that can be used in **NetlifyPress**.
+7. You'll be given a Build Hook URL that can be used in **Deploy with NetlifyPress**.
 
 ### Install
 #### Automatic Installation
 1. Go to your *WordPress Dashboard→Plugins→Add New*.
-2. Search for **"NetlifyPress"**.
+2. Search for **"Deploy with NetlifyPress"**.
 3. Click on **"Install"**.
 4. Once installed, click on **"Activate"**.
 
@@ -102,7 +102,7 @@ This plugin requires you have a site hosted on Netlify and a Build Webhook URL s
 
 = Is this plugin free? =
 
-Definitely! NetlifyPress is free and always will be.
+Definitely! Deploy with NetlifyPress is free and always will be.
 
 = How many deploys can I trigger? =
 

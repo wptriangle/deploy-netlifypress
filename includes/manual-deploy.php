@@ -3,7 +3,7 @@
  * Manual Deployment
  *
  * @since      1.0
- * @package    NetlifyPress
+ * @package    Deploy with NetlifyPress
  * @author     Nahid Ferdous Mohit
  */
 
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'admin_bar_menu', 'netlifypress_manual_deploy_button', 999 );
 function netlifypress_manual_deploy_button( $wp_admin_bar ) {
-    if ( current_user_can( 'manage_options' ) && ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'manual_deploy' ) == 'on' ) {
+    if ( current_user_can( 'manage_options' ) && ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'netlifypress_manual_deploy' ) == 'on' ) {
         $args = array(
             'id'    => 'netlifypress_manual_deploy_button',
             'title' => '<span class="ab-icon"></span>' . __( 'Trigger Netlify Deploy' ),
@@ -40,7 +40,7 @@ function netlifypress_manual_deploy_button( $wp_admin_bar ) {
 
 add_action( 'init', 'netlifypress_manual_deploy_initialize' );
 function netlifypress_manual_deploy_initialize() {
-    if ( current_user_can( 'manage_options' ) && is_admin_bar_showing() && ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'manual_deploy' ) == 'on' ) {
+    if ( current_user_can( 'manage_options' ) && is_admin_bar_showing() && ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'netlifypress_manual_deploy' ) == 'on' ) {
         add_action( 'admin_enqueue_scripts', 'netlifypress_manual_trigger_script' );
         add_action( 'wp_enqueue_scripts', 'netlifypress_manual_trigger_script' );
     }
@@ -74,7 +74,7 @@ function netlifypress_manual_trigger_script() {
 
 add_action( 'init', 'netlifypress_frontend_button_icon' );
 function netlifypress_frontend_button_icon() {
-    if ( current_user_can( 'manage_options' ) && is_admin_bar_showing() && ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'manual_deploy' ) == 'on' ) {
+    if ( current_user_can( 'manage_options' ) && is_admin_bar_showing() && ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'netlifypress_manual_deploy' ) == 'on' ) {
         add_action( 'wp_footer', 'netlifypress_topbar_button_icon_styles' );
         add_action( 'admin_footer', 'netlifypress_topbar_button_icon_styles' );
     }
