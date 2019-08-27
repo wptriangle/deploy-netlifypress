@@ -16,6 +16,8 @@ function netlifypress_enqueue_admin_assets( $hook ) {
 	if( $hook != $netlifypress_options_page ) {
 		return;
 	}
+    wp_enqueue_script( 'netlifypress-admin-popper',  plugin_dir_url( dirname( __FILE__ ) ) . 'assets/dist/js/popper.min.js', array( 'jquery' ), '', true  );
+    wp_enqueue_script( 'netlifypress-admin-bootstrap',  plugin_dir_url( dirname( __FILE__ ) ) . 'assets/dist/js/bootstrap.min.js', array( 'jquery' ), '', true  );
     wp_enqueue_script( 'netlifypress-admin-script',  plugin_dir_url( dirname( __FILE__ ) ) . 'assets/dist/js/main.min.js', array( 'jquery' ), '', true  );
     wp_enqueue_style( 'netlifypress-admin-style',  plugin_dir_url( dirname( __FILE__ ) ) . 'assets/dist/css/main.min.css' );
 }

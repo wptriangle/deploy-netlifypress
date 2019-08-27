@@ -4,6 +4,15 @@
  */
 
 /*
+ * Fontawesome SCSS
+ */
+
+$fa-font-path: "../../../node_modules/@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+@import "@fortawesome/fontawesome-free/scss/brands.scss";
+
+/*
  * Bootstrap SCSS
  */
 
@@ -57,11 +66,10 @@
                         background-color: #00C7B7;
                         color: #fff;
                         padding: 15px 15px 15px 13px;
+                        text-align: center;
 
-                        svg {
-                            display: block;
-                            width: 40px;
-                            height: 40px;
+                        i {
+                            font-size: 40px;
                         }
                     }
 

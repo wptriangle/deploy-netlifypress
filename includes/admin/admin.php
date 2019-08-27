@@ -51,24 +51,24 @@ function netlifypress_options_page_display() {
                             <li class="nav-item">
                                 <a class="nav-link active" id="connect-netlify-tab" data-toggle="tab" href="#connect-netlify" role="tab" aria-controls="connect-netlify" aria-selected="true">
                                     <div class="row">
-                                        <div class="tab-icon col-2"><i class="fas fa-link"></i></div>
-                                        <div class="tab-label col-10"><?php _e( 'Connect with Netlify', 'deploy-with-netlifypress' ); ?></div>
+                                        <div class="tab-icon col-3"><i class="fas fa-link"></i></div>
+                                        <div class="tab-label col-9"><?php _e( 'Connect with Netlify', 'deploy-with-netlifypress' ); ?></div>
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link <?php echo empty( get_option( 'netlifypress_build_hook_url' ) ) ? 'disabled' : NULL ?>" id="deploy-configuration-tab" data-toggle="tab" href="#automatic-deployment" role="tab" aria-controls="automatic-deployment" aria-selected="false">
                                     <div class="row">
-                                        <div class="tab-icon col-2"><i class="fas fa-robot"></i></div>
-                                        <div class="tab-label col-10"><?php _e( 'Automatic Deployment', 'deploy-with-netlifypress' ); ?></div>
+                                        <div class="tab-icon col-3"><i class="fas fa-robot"></i></div>
+                                        <div class="tab-label col-9"><?php _e( 'Automatic Deployment', 'deploy-with-netlifypress' ); ?></div>
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link <?php echo empty( get_option( 'netlifypress_build_hook_url' ) ) ? 'disabled' : NULL ?>" id="manual-configuration-tab" data-toggle="tab" href="#manual-deployment" role="tab" aria-controls="manual-deployment" aria-selected="false">
                                     <div class="row">
-                                        <div class="tab-icon col-2"><i class="fas fa-mouse-pointer"></i></div>
-                                        <div class="tab-label col-10"><?php _e( 'Manual Deployment', 'deploy-with-netlifypress' ); ?></div>
+                                        <div class="tab-icon col-3"><i class="fas fa-mouse-pointer"></i></div>
+                                        <div class="tab-label col-9"><?php _e( 'Manual Deployment', 'deploy-with-netlifypress' ); ?></div>
                                     </div>
                                 </a>
                             </li>

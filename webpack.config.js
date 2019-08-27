@@ -12,6 +12,12 @@ const path = require( 'path' );
  * Plugins
  */
 
+const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
+
+/*
+ * Plugins
+ */
+
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 /*
@@ -19,10 +25,14 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
  */
 
 module.exports = {
-	entry: './assets/src/js/main.js',
+	entry: {
+		popper: './node_modules/popper.js/dist/popper.js',
+		bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js',
+		main: './assets/src/js/main.js',
+	},
 	output: {
-		filename: 'main.min.js',
-		path: path.resolve(__dirname, './assets/dist/js/')
+		filename: '[name].min.js',
+		path: path.resolve( __dirname, './assets/dist/js/' )
 	},
 
 	module: {
@@ -36,7 +46,6 @@ module.exports = {
 			},
 			{
 		    test: /\.(woff2?|ttf|otf|eot|svg)$/,
-			    exclude: /node_modules/,
 			    loader: 'file-loader',
 			    options: {
 			        name: '[name].[ext]',
@@ -56,6 +65,7 @@ module.exports = {
 	},
 
 	plugins: [
+		new UnminifiedWebpackPlugin(),
 		new ExtractTextPlugin('../css/main.min.css', {
             allChunks: true
         })

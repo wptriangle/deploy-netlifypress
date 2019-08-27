@@ -10,21 +10,6 @@
 import '../sass/main.scss';
 
 /*
- * Bootstrap JS
- */
-
-import 'bootstrap';
-
-/*
- * Fontawesome
- */
-
-import '@fortawesome/fontawesome-free/js/fontawesome'
-import '@fortawesome/fontawesome-free/js/solid'
-import '@fortawesome/fontawesome-free/js/regular'
-import '@fortawesome/fontawesome-free/js/brands'
-
-/*
  * Custom JS
  */
 

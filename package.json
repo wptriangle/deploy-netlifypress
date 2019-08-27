@@ -26,6 +26,7 @@
   "resolve-url-loader": "^3.0.0-alpha.1",
   "sass-loader": "^7.1.0",
   "style-loader": "^0.22.1",
+  "unminified-webpack-plugin": "^2.0.0",
   "webpack": "^4.16.5",
   "webpack-cli": "^3.1.0"
  },
