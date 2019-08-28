@@ -4,7 +4,7 @@
  * Plugin URI: https://nahid.dev/project/deploy-netlifypress
  * Description: Seamlessly trigger deploys in Netlify from WordPress
  * Author: Nahid Ferdous Mohit
- * Version: 1.0
+ * Version: 1.0.1
  * Author URI: https://nahid.dev
  * Text Domain: deploy-netlifypress
  *
