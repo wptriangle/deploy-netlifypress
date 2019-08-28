@@ -117,10 +117,16 @@ Unlimited.
 
 == Changelog ==
 
+= 1.0.1 =
+* Ensured maximum compability with provided plugin slug
+
 = 1.0 =
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+* Ensured maximum compability with provided plugin slug
 
 = 1.0 =
 * Initial Release
