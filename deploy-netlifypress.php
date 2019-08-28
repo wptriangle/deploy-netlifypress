@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Deploy with NetlifyPress
- * Plugin URI: https://nahid.dev/project/deploy-with-netlifypress
+ * Plugin URI: https://nahid.dev/project/deploy-netlifypress
  * Description: Seamlessly trigger deploys in Netlify from WordPress
  * Author: Nahid Ferdous Mohit
  * Version: 1.0
  * Author URI: https://nahid.dev
- * Text Domain: deploy-with-netlifypress
+ * Text Domain: deploy-netlifypress
  *
  * @since      1.0
  * @package    Deploy with NetlifyPress

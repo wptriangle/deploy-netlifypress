@@ -49,7 +49,7 @@ Installation of the **Deploy with NetlifyPress** plugin is very simple. Follow a
 5. On the "*Manual Deployment*" tab, choose if you want to add a "Trigger Netlify Deploy" manual trigger button in the top admin toolbar.
 
 ### Support
-If the above usage steps don't answer your question(s), if you want to report an issue or if something is not working as expected, please create a topic in the [Support Forum](https://wordpress.org/support/plugin/netlifypress/).
+If the above usage steps don't answer your question(s), if you want to report an issue or if something is not working as expected, please create a topic in the [Support Forum](https://wordpress.org/support/plugin/deploy-netlifypress/).
 
 ### Roadmap
 I have plans for the following features/improvements in the coming days (subject to user feedback and usage):
@@ -60,7 +60,7 @@ I have plans for the following features/improvements in the coming days (subject
 5. Deployment logs.
 
 ### Contribute
-If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit-wpmudev/deploy-with-netlifypress).
+If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit-wpmudev/deploy-netlifypress).
 
 ### Sponsor
 You can sponsor this project and support my open-source development by [becoming a Patron](https://www.patreon.com/nfmohit)!
