@@ -3,7 +3,7 @@ Contributors: nfmohit
 Donate link: https://www.patreon.com/nfmohit
 Tags: netlify, automation, deployment
 Requires at least: 4.0
-Tested up to: 5.2.2
+Tested up to: 5.3
 Stable tag: 1.0.1
 Requires PHP: 5.6
 License: GPLv2 or later
