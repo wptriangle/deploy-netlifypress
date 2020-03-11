@@ -12,13 +12,13 @@ const path = require( 'path' );
  * Plugins
  */
 
-const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
+const UnminifiedWebpackPlugin = require( 'unminified-webpack-plugin' );
 
 /*
  * Plugins
  */
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 /*
  * Configuration
@@ -30,6 +30,7 @@ module.exports = {
 		bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js',
 		main: './assets/src/js/main.js',
 	},
+
 	output: {
 		filename: '[name].min.js',
 		path: path.resolve( __dirname, './assets/dist/js/' )
@@ -39,10 +40,12 @@ module.exports = {
 		rules: [
 			{
 				test:/\.(s*)css$/,
-				use: ExtractTextPlugin.extract({
-					fallback:'style-loader',
-                    use:['css-loader', 'resolve-url-loader', 'sass-loader'],
-                })
+				use: [
+					"style-loader",
+					MiniCssExtractPlugin.loader,
+					"css-loader",
+					"sass-loader"
+				]
 			},
 			{
 		    test: /\.(woff2?|ttf|otf|eot|svg)$/,
@@ -66,9 +69,9 @@ module.exports = {
 
 	plugins: [
 		new UnminifiedWebpackPlugin(),
-		new ExtractTextPlugin('../css/main.min.css', {
-            allChunks: true
-        })
+		new MiniCssExtractPlugin( {
+			filename: '../css/[name].min.css',
+		} )
 	],
 
 	externals: {
