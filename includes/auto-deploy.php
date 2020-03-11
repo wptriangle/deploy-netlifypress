@@ -25,7 +25,7 @@ if ( ! empty( get_option( 'netlifypress_build_hook_url' ) ) && get_option( 'netl
 
     add_action( 'init', 'netlifypress_auto_deploy_initialize' );
     function netlifypress_auto_deploy_initialize() {
-        if ( current_user_can( 'manage_options' ) && ( in_array( 'publish', get_option( 'netlifypress_action_auto_deploy' ) ) || in_array( 'update', get_option( 'netlifypress_action_auto_deploy' ) ) || in_array( 'trash', get_option( 'netlifypress_action_auto_deploy' ) ) ) ) {
+        if ( ( in_array( 'publish', get_option( 'netlifypress_action_auto_deploy' ) ) || in_array( 'update', get_option( 'netlifypress_action_auto_deploy' ) ) || in_array( 'trash', get_option( 'netlifypress_action_auto_deploy' ) ) ) ) {
             add_action( 'save_post', 'netlifypress_deploy_trigger', 10, 2 );
         }
     }
