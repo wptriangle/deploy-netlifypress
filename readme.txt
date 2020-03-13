@@ -130,6 +130,10 @@ Unlimited.
 
 == Upgrade Notice ==
 
+= 1.0.2 =
+* Tested up-to WordPress 5.4
+* Fixed issue with deploys not working for updates from native appps ( [#1](https://github.com/nfmohit-wpmudev/deploy-netlifypress/issues/1), [#2](https://github.com/nfmohit-wpmudev/deploy-netlifypress/pull/2) )
+
 = 1.0.1 =
 * Ensured maximum compability with provided plugin slug
 
