@@ -60,7 +60,7 @@ function netlifypress_options_page_display() {
             /* Auto Deploy Post Types */
 
             if ( ! get_option( 'netlifypress_post_types_auto_deploy' ) ) {
-                add_option( 'netlifypress_post_types_auto_deploy', get_post_types() );
+                add_option( 'netlifypress_post_types_auto_deploy', [ 'post', 'page' ] );
             }
         }
 
