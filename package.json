@@ -1,6 +1,6 @@
 {
  "name": "deploy-netlifypress",
- "version": "1.0.0",
+ "version": "1.1.0",
  "description": "Seamlessly trigger deploys in Netlify from WordPress",
  "main": "assets/src/js/main.js",
  "scripts": {
