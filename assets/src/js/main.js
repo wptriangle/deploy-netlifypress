@@ -67,6 +67,36 @@ import '../sass/main.scss';
         $( '#automatic-deployment input#netlifypress_auto_deploy' ).click( function () {
             $( '.auto-deploy-actions-post-types' ).slideToggle();
         });
+        
+        /* "Selct All" checkboxes for the manual-deploy selections */
+
+        /* Authorized roles Selection */
+
+        $( '.authorized-roles-form-group #netlifypress_auth_role_all' ).on( 'click', function() {
+            if( this.checked ) {
+                $( '.authorized-roles-form-group input[type=checkbox]:not( #netlifypress_auth_role_all )' ).each( function() {
+                    this.checked = true;
+                } );
+            } else {
+                 $( '.authorized-roles-form-group input[type=checkbox]:not( #netlifypress_auth_role_all )' ).each( function() {
+                    this.checked = false;
+                } );
+            }
+        });
+        
+        $( '.authorized-roles-form-group input[type=checkbox]:not( #netlifypress_auth_role_all )' ).on( 'click', function() {
+            if( $( '.authorized-roles-form-group input[type=checkbox]:not( #netlifypress_auth_role_all ):checked' ).length == $( '.authorized-roles-form-group input[type=checkbox]:not( #netlifypress_auth_role_all )' ).length ) {
+                $( '.authorized-roles-form-group #netlifypress_auth_role_all' ).prop( 'checked', true );
+            } else {
+                $( '.authorized-roles-form-group #netlifypress_auth_role_all' ).prop( 'checked', false );
+            }
+        } );
+
+        /* Manual Deploy Settings - Display Conditions */
+
+        $( '#manual-deployment input#netlifypress_manual_deploy' ).click( function () {
+            $( '.manual-deploy-authorized-roles' ).slideToggle();
+        });
 
     } );
 } )( jQuery );

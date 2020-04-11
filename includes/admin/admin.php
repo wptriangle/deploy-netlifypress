@@ -30,9 +30,62 @@ function netlifypress_setup_options_page() {
  */
 
 function netlifypress_options_page_display() {
+
+    /*
+    * Save default settings
+    */
+
+    if ( ! empty( get_option( 'netlifypress_build_hook_url' ) ) ) {
+
+        /* Auto Deploy Status */
+
+        if ( ! get_option( 'netlifypress_auto_deploy' ) ) {
+            add_option( 'netlifypress_auto_deploy', 'on' );
+        }
+
+        /* Make sure auto deploy is on before other settings are processed */
+
+        if ( get_option( 'netlifypress_auto_deploy' ) == 'on' ) {
+
+            /* Auto Deploy Actions */
+
+            if ( ! get_option( 'netlifypress_action_auto_deploy' ) ) {
+                add_option( 'netlifypress_action_auto_deploy', array(
+                    'publish',
+                    'update',
+                    'trash'
+                ) );
+            }
+
+            /* Auto Deploy Post Types */
+
+            if ( ! get_option( 'netlifypress_post_types_auto_deploy' ) ) {
+                add_option( 'netlifypress_post_types_auto_deploy', get_post_types() );
+            }
+        }
+
+        /* Manual Deploy Status */
+
+        if ( ! get_option( 'netlifypress_manual_deploy' ) ) {
+            add_option( 'netlifypress_manual_deploy', 'on' );
+        }
+
+        /* Make sure manual deploy is on before other settings are processed */
+
+        if ( get_option( 'netlifypress_manual_deploy' ) == 'on' ) {
+
+            /* Auto Deploy Post Types */
+
+            if ( ! get_option( 'netlifypress_auth_roles_manual_deploy' ) ) {
+                add_option( 'netlifypress_auth_roles_manual_deploy', [ 'administrator' ] );
+            }
+        }
+    }
+
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_die( 'Unauthorized user' );
     }
+
     ?>
         <div class="netlifypress-admin-wrapper">
             <div class="container">
@@ -193,6 +246,49 @@ function netlifypress_options_page_display() {
                                                 <label class="custom-control-label" for="netlifypress_manual_deploy"> <?php _e( 'On', 'deploy-netlifypress' ); ?></label>
                                             </div>
                                         </div>
+
+                                        <style>
+                                            .manual-deploy-authorized-roles {
+                                                <?php
+                                                    if ( get_option( 'netlifypress_manual_deploy' ) == 'on' ) {
+                                                        ?>
+                                                            display: block;
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                            display: none;
+                                                        <?php
+                                                    }
+                                                ?>
+                                            }
+                                        </style>
+
+                                        <div class="manual-deploy-authorized-roles">
+                                            <div class="form-group authorized-roles-form-group">
+                                                <h3><?php _e( 'Authorized Roles', 'deploy-netlifypress' ); ?></h3>
+                                                <p><?php _e( 'Specify user roles which can trigger manual deployments', 'deploy-netlifypress' ); ?></p>
+
+                                                <?php
+                                                    global $wp_roles;
+                                                    $valid_user_roles = $wp_roles->get_names();
+                                                ?>
+
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="netlifypress_auth_role_all" <?php echo ( array_diff( array_keys( $valid_user_roles ), get_option( 'netlifypress_auth_roles_manual_deploy' ) ) === array_diff( get_option( 'netlifypress_auth_roles_manual_deploy' ), array_keys( $valid_user_roles ) ) ) ? 'checked' : ''; ?>>
+                                                    <label class="custom-control-label" for="netlifypress_auth_role_all"> <?php _e( 'All', 'deploy-netlifypress' ); ?></label>
+                                                </div>
+                                                <?php
+                                                    foreach ( $valid_user_roles as $key => $user_role ) {
+                                                        ?>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input" id="netlifypress_auth_role_<?php echo $key; ?>" name="netlifypress_auth_roles_manual_deploy[]" value="<?php echo $key; ?>" <?php echo in_array( $key, get_option( 'netlifypress_auth_roles_manual_deploy' ) ) ? 'checked' : ''; ?>>
+                                                            <label class="custom-control-label" for="netlifypress_auth_role_<?php echo $key; ?>"> <?php echo $user_role; ?></label>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                ?>
+                                            </div>
+                                        </div>
                                     </fieldset>    
                                 </div>
                             <?php } ?> 
@@ -221,36 +317,6 @@ function netlifypress_options_response() {
 
         if ( isset( $_POST[ 'netlifypress_build_hook_url' ] ) && ! empty( $_POST[ 'netlifypress_build_hook_url' ] ) ) {
             update_option( 'netlifypress_build_hook_url', esc_url_raw( $_POST[ 'netlifypress_build_hook_url' ] ) );
-        }
-
-        /* Default Options */
-
-        if ( ! empty( get_option( 'netlifypress_build_hook_url' ) ) ) {
-
-            /* Auto Deploy Status */
-    
-            add_option( 'netlifypress_auto_deploy', 'on' );
-    
-            /* Make sure auto deploy is on before other settings are processed */
-    
-            if ( get_option( 'netlifypress_auto_deploy' ) == 'on' ) {
-    
-                /* Auto Deploy Actions */
-    
-                add_option( 'netlifypress_action_auto_deploy', array(
-                    'publish',
-                    'update',
-                    'trash'
-                ) );
-    
-                /* Auto Deploy Post Types */
-    
-                add_option( 'netlifypress_post_types_auto_deploy', get_post_types() );
-            }
-    
-            /* Manual Deploy Status */
-    
-            add_option( 'netlifypress_manual_deploy', 'on' );
         }
 
         /* Make sure webhook URL is set before other settings are processed */
@@ -317,6 +383,24 @@ function netlifypress_options_response() {
 
                 if ( in_array( $manual_deploy_status, $valid_manual_deploy_statuses ) ) {
                     update_option( 'netlifypress_manual_deploy', $manual_deploy_status );
+                }
+            }
+
+            /* Make sure manual deploy is on before other settings are processed */
+    
+            if ( get_option( 'netlifypress_manual_deploy' ) == 'on' ) {
+
+                /* Manual Deploy Authorized Roles */
+
+                global $wp_roles;
+                $valid_user_roles = array_keys( $wp_roles->get_names() );
+
+                if ( isset( $_POST[ 'netlifypress_auth_roles_manual_deploy' ] ) && ! empty( $_POST[ 'netlifypress_auth_roles_manual_deploy' ] ) ) {
+                    $set_auth_role = array_map( 'sanitize_text_field', $_POST[ 'netlifypress_auth_roles_manual_deploy' ] );
+
+                    if ( ! empty( array_intersect( $set_auth_role, $valid_user_roles ) ) ) {
+                        update_option( 'netlifypress_auth_roles_manual_deploy', $set_auth_role );
+                    }
                 }
             }
         }
