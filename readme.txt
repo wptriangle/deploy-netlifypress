@@ -3,8 +3,8 @@ Contributors: nfmohit
 Donate link: https://www.patreon.com/nfmohit
 Tags: netlify, automation, deployment
 Requires at least: 4.0
-Tested up to: 5.4
-Stable tag: 1.1.0
+Tested up to: 5.5
+Stable tag: 1.1.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -117,6 +117,10 @@ Unlimited.
 
 == Changelog ==
 
+= 1.1.1 =
+* Ensured compability with WordPress 5.5
+* Updated development packages
+
 = 1.1.0 =
 * Added an option to set authorized roles who can trigger manual deploys (defaults to administrator) ( requested [here](https://wordpress.org/support/topic/trigger-link-for-the-editor-role/) )
 * Changed default post types for automatic deployments to posts and pages only
@@ -133,6 +137,10 @@ Unlimited.
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+* Ensured compability with WordPress 5.5
+* Updated development packages
 
 = 1.1.0 =
 * You can now let users belonging to other user roles the ability to trigger manual deploys ( requested [here](https://wordpress.org/support/topic/trigger-link-for-the-editor-role/) )
