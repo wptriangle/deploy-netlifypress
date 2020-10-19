@@ -3,8 +3,8 @@ Contributors: nfmohit
 Donate link: https://www.patreon.com/nfmohit
 Tags: netlify, automation, deployment
 Requires at least: 4.0
-Tested up to: 5.4
-Stable tag: 1.1.0
+Tested up to: 5.5
+Stable tag: 1.1.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ Instead of going into [Netlify](https://netlify.com) and triggering a deploy eve
 ### Use Cases
 So, you've build a headless static front-end for your WordPress site and hosted it on [Netlify](https://netlify.com), good job! Wondering how would you trigger a deploy in [Netlify](https://netlify.com) everytime someone updates a post in WordPress? Forget going inside everytime an update is made and triggering a build manually, install **Deploy with NetlifyPress** and let it run a deploy for you automatically on each update.
 
-If you're looking for a real-life example, I've build my personal site [nahid.dev](https://nahid.dev) ([GitHub](https://github.com/nfmohit-wpmudev/nahid.dev)) using [GatsbyJS](https://www.gatsbyjs.org/) with its source as WordPress and am hosting it on [Netlify](https://netlify.com). I use **Deploy with NetlifyPress** to automate deploys when I update pages and posts.
+If you're looking for a real-life example, I've build my personal site [nahid.dev](https://nahid.dev) ([GitHub](https://github.com/nfmohit/nahid.dev)) using [GatsbyJS](https://www.gatsbyjs.org/) with its source as WordPress and am hosting it on [Netlify](https://netlify.com). I use **Deploy with NetlifyPress** to automate deploys when I update pages and posts.
 
 ### Core Features
 The core features of the plugin include the abilities to:
@@ -60,7 +60,7 @@ I have plans for the following features/improvements in the coming days (subject
 5. Deployment logs.
 
 ### Contribute
-If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit-wpmudev/deploy-netlifypress).
+If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit/deploy-netlifypress).
 
 ### Sponsor
 You can sponsor this project and support my open-source development by [becoming a Patron](https://www.patreon.com/nfmohit)!
@@ -117,13 +117,17 @@ Unlimited.
 
 == Changelog ==
 
+= 1.1.1 =
+* Ensured compability with WordPress 5.5
+* Updated development packages
+
 = 1.1.0 =
 * Added an option to set authorized roles who can trigger manual deploys (defaults to administrator) ( requested [here](https://wordpress.org/support/topic/trigger-link-for-the-editor-role/) )
 * Changed default post types for automatic deployments to posts and pages only
 
 = 1.0.2 =
 * Tested up-to WordPress 5.4
-* Fixed issue with deploys not working for updates from native appps ( [#1](https://github.com/nfmohit-wpmudev/deploy-netlifypress/issues/1), [#2](https://github.com/nfmohit-wpmudev/deploy-netlifypress/pull/2) )
+* Fixed issue with deploys not working for updates from native appps ( [#1](https://github.com/nfmohit/deploy-netlifypress/issues/1), [#2](https://github.com/nfmohit/deploy-netlifypress/pull/2) )
 * Updated developer tools
 
 = 1.0.1 =
@@ -134,13 +138,17 @@ Unlimited.
 
 == Upgrade Notice ==
 
+= 1.1.1 =
+* Ensured compability with WordPress 5.5
+* Updated development packages
+
 = 1.1.0 =
 * You can now let users belonging to other user roles the ability to trigger manual deploys ( requested [here](https://wordpress.org/support/topic/trigger-link-for-the-editor-role/) )
 * Default post types for automatic deployments have been changed to posts and pages only. This helps prevent un-intended deploys from non-generic post types (only for new installations)
 
 = 1.0.2 =
 * Tested up-to WordPress 5.4
-* Fixed issue with deploys not working for updates from native appps ( [#1](https://github.com/nfmohit-wpmudev/deploy-netlifypress/issues/1), [#2](https://github.com/nfmohit-wpmudev/deploy-netlifypress/pull/2) )
+* Fixed issue with deploys not working for updates from native appps ( [#1](https://github.com/nfmohit/deploy-netlifypress/issues/1), [#2](https://github.com/nfmohit/deploy-netlifypress/pull/2) )
 
 = 1.0.1 =
 * Ensured maximum compability with provided plugin slug

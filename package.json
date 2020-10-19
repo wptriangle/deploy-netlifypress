@@ -18,21 +18,21 @@
  },
  "homepage": "https://github.com/nfmohit-wpmudev/netlifypress#readme",
  "devDependencies": {
-  "@fortawesome/fontawesome-free": "^5.10.1",
+  "@fortawesome/fontawesome-free": "^5.15.1",
   "css-loader": "^1.0.0",
   "file-loader": "^1.1.11",
   "mini-css-extract-plugin": "^0.9.0",
-  "node-sass": "^4.13.1",
-  "resolve-url-loader": "^3.0.0-alpha.1",
-  "sass-loader": "^7.1.0",
+  "node-sass": "^4.14.1",
+  "resolve-url-loader": "^3.1.1",
+  "sass-loader": "^7.3.1",
   "style-loader": "^0.22.1",
   "unminified-webpack-plugin": "^2.0.0",
-  "webpack": "^4.16.5",
-  "webpack-cli": "^3.1.0"
+  "webpack": "^4.44.2",
+  "webpack-cli": "^3.3.12"
  },
  "dependencies": {
-  "bootstrap": "^4.3.1",
-  "jquery": "^3.4.1",
-  "popper.js": "^1.15.0"
+  "bootstrap": "^4.5.3",
+  "jquery": "^3.5.1",
+  "popper.js": "^1.16.1"
  }
 }

@@ -8,7 +8,7 @@ Instead of going into [Netlify](https://netlify.com) and triggering a deploy eve
 ### Use Cases
 So, you've build a headless static front-end for your WordPress site and hosted it on [Netlify](https://netlify.com), good job! Wondering how would you trigger a deploy in [Netlify](https://netlify.com) everytime someone updates a post in WordPress? Forget going inside everytime an update is made and triggering a build manually, install **Deploy with NetlifyPress** and let it run a deploy for you automatically on each update.
 
-If you're looking for a real-life example, I've build my personal site [nahid.dev](https://nahid.dev) ([GitHub](https://github.com/nfmohit-wpmudev/nahid.dev)) using [GatsbyJS](https://www.gatsbyjs.org/) with its source as WordPress and am hosting it on [Netlify](https://netlify.com). I use **Deploy with NetlifyPress** to automate deploys when I update pages and posts.
+If you're looking for a real-life example, I've build my personal site [nahid.dev](https://nahid.dev) ([GitHub](https://github.com/nfmohit/nahid.dev)) using [GatsbyJS](https://www.gatsbyjs.org/) with its source as WordPress and am hosting it on [Netlify](https://netlify.com). I use **Deploy with NetlifyPress** to automate deploys when I update pages and posts.
 
 ### Core Features
 The core features of the plugin include the abilities to:
@@ -61,7 +61,7 @@ I have plans for the following features/improvements in the coming days (subject
 5. Deployment logs.
 
 ### Contribute
-If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit-wpmudev/deploy-netlifypress).
+If you want to contribute to the plugin by reporting issues, implementing new features and so on, [here's its development repository on Github](https://github.com/nfmohit/deploy-netlifypress).
 
 ### Sponsor
 You can sponsor this project and support my open-source development by [becoming a Patron](https://www.patreon.com/nfmohit)!
